@@ -22,10 +22,11 @@ const App = () => {
 
 // 404 Page
 const NoMatch = ({ location }) => (
-  <div>
-    <h3>
-      No match for <code>{location.pathname}</code>
-    </h3>
+  <div className="nomatch">
+    <h1>Sorry,</h1>
+    <p>
+      the page <code>{location.pathname}</code> was <b>not found</b>
+    </p>
   </div>
 );
 

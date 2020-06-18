@@ -89,6 +89,27 @@ body {
   width: 300px;
   height: 200px; }
 
+.nomatch {
+  margin: auto;
+  padding-left: 100px;
+  padding-top: 100px;
+  font-weight: 500; }
+  .nomatch h1 {
+    font-size: 4.5rem; }
+  .nomatch p {
+    font-size: 3rem; }
+  .nomatch::before {
+    content: "";
+    background: url("./404.jpg") no-repeat center/cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0.75;
+    filter: blur(1px); }
+
 .hotel-list {
   position: absolute;
   top: 0;
