@@ -6,19 +6,31 @@ import MapContainer from "./components/MapContainer";
 import Footer from ".//components/Footer";
 import HotelItem from "./components/HotelItem";
 
-const App = () => {
-  return (
-    <div>
-      <Header />
-      <Switch>
-        <Route path="/" exact component={MapContainer} />
-        <Route path="/hotel" component={HotelItem} />
-        <Route component={NoMatch} />
-      </Switch>
-      <Footer />
-    </div>
-  );
-};
+class App extends React.Component {
+  state = { term: "" };
+
+  onTermSubmit = (term) => {
+    this.setState({ term });
+  };
+
+  render() {
+    return (
+      <div>
+        <Header onFormSubmit={this.onTermSubmit} />
+        <Switch>
+          <Route
+            path="/"
+            exact
+            component={() => <MapContainer Term={this.state.term} />}
+          />
+          <Route path="/hotel" component={HotelItem} />
+          <Route component={NoMatch} />
+        </Switch>
+        <Footer />
+      </div>
+    );
+  }
+}
 
 // 404 Page
 const NoMatch = ({ location }) => (

@@ -10,9 +10,33 @@ let styles = {
 };
 
 class HotelList extends React.Component {
-  renderList = () => {
+  renderFilteredList = (term) => {
     const hotelList = this.props.Hotels;
 
+    // Filter by hotel.type
+    const filteredList = hotelList.filter((hotel) =>
+      hotel.type.toLowerCase().includes(term.toLowerCase())
+    );
+
+    // No matches found on filter
+    if (filteredList.length === 0) {
+      return (
+        <div className="search-nomatch">
+          <h1>Sorry :(</h1>
+          <p>
+            No matches for <code>{term}</code>
+          </p>
+          <p>Please try again.</p>
+        </div>
+      );
+    }
+
+    // Pass array to renderList
+    return this.renderList(filteredList);
+  };
+
+  renderList = (hotelList) => {
+    // Map array and return hotel details
     return hotelList.map((hotel) => {
       return (
         <div className="hotel-item" key={hotel.adr}>
@@ -76,7 +100,17 @@ class HotelList extends React.Component {
   };
 
   render() {
-    return <div className="hotel-list">{this.renderList()}</div>;
+    if (this.props.filterTerm) {
+      return (
+        <div className="hotel-list">
+          {this.renderFilteredList(this.props.filterTerm)}
+        </div>
+      );
+    }
+
+    return (
+      <div className="hotel-list">{this.renderList(this.props.Hotels)}</div>
+    );
   }
 }
 
