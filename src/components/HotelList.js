@@ -2,7 +2,8 @@ import React from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from "react-responsive-carousel";
 import { Link } from "react-router-dom";
-import { renderImages } from "./renderImages";
+
+import FilterContext from "../contexts/FilterContext";
 
 let styles = {
   width: "500px",
@@ -10,6 +11,8 @@ let styles = {
 };
 
 class HotelList extends React.Component {
+  static contextType = FilterContext;
+
   renderFilteredList = (term) => {
     const hotelList = this.props.Hotels;
 
@@ -100,11 +103,12 @@ class HotelList extends React.Component {
   };
 
   render() {
-    if (this.props.filterTerm) {
+    // Input term from Context
+    const filterTerm = this.context.term;
+    console.log(filterTerm);
+    if (filterTerm) {
       return (
-        <div className="hotel-list">
-          {this.renderFilteredList(this.props.filterTerm)}
-        </div>
+        <div className="hotel-list">{this.renderFilteredList(filterTerm)}</div>
       );
     }
 

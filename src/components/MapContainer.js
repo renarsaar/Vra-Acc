@@ -24,7 +24,6 @@ class MapContainer extends React.Component {
     showingInfoWindow: false,
     activeMarker: {},
     selectedPlace: {},
-    filterTerm: "",
     hotels: [
       {
         id: 1,
@@ -102,10 +101,6 @@ class MapContainer extends React.Component {
     ],
   };
 
-  componentDidMount() {
-    this.setState({ filterTerm: this.props.Term });
-  }
-
   // Marker events
   onMarkerClick = (props, marker) => {
     this.setState({
@@ -164,7 +159,6 @@ class MapContainer extends React.Component {
   };
 
   render() {
-    // console.log(this.state.filterTerm);
     return (
       <div className="map-container">
         <Map
@@ -191,10 +185,7 @@ class MapContainer extends React.Component {
             </div>
           </InfoWindow>
         </Map>
-        <HotelList
-          filterTerm={this.state.filterTerm}
-          Hotels={this.state.hotels}
-        />
+        <HotelList Hotels={this.state.hotels} />
       </div>
     );
   }

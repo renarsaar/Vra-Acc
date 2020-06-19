@@ -1,17 +1,23 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import FilterContext from "../contexts/FilterContext";
+
 class Header extends React.Component {
+  static contextType = FilterContext;
   state = { term: "" };
 
+  // Change term in context
   onFormSubmit = (e) => {
     e.preventDefault();
 
-    this.props.onFormSubmit(this.state.term);
+    this.context.onTermChange(this.state.term);
   };
 
   onInputChange = (e) => {
     this.setState({ term: e.target.value });
+    // // Live search
+    // this.context.onTermChange(this.state.term);
   };
 
   render() {
