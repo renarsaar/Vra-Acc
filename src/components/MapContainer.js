@@ -1,6 +1,7 @@
 import React from "react";
 import { Map, Marker, GoogleApiWrapper, InfoWindow } from "google-maps-react";
 
+import { Hotels } from "./data/Hotels";
 import HotelList from "./HotelList";
 
 const mapStyles = {
@@ -8,97 +9,12 @@ const mapStyles = {
   height: "90%",
 };
 
-let markerMapStyles = {
-  width: "300px",
-  height: "85px",
-  marginBottom: "117px",
-};
-
-let infoStyles = {
-  width: "500px",
-  height: "200px",
-};
-
 class MapContainer extends React.Component {
   state = {
     showingInfoWindow: false,
     activeMarker: {},
     selectedPlace: {},
-    hotels: [
-      {
-        id: 1,
-        lat: 59.442388,
-        lng: 24.728412,
-        adr: "Graniidi 2",
-        title: "City Center Superb Studio",
-        reviews: 223,
-        rating: 4.79,
-        guests: 4,
-        beds: 2,
-        bath: 1,
-        type: "Entire apartment",
-        price: 195,
-        images: ["./img/1.jpg", "./img/3.jpg", "./img/8.jpg", "./img/12.jpg"],
-        other: [
-          "Free parking",
-          "Kitchen",
-          "Wifi",
-          "Washer",
-          "Hangers",
-          "Heating",
-          "Animals allowed",
-          "Hair fryer",
-        ],
-      },
-      {
-        id: 2,
-        lat: 59.435558,
-        lng: 24.765397,
-        adr: "Raua 2",
-        title: "Bright, big and quiet house",
-        reviews: 143,
-        rating: 4.22,
-        guests: 3,
-        beds: 2,
-        bath: 1,
-        type: "Entire house",
-        price: 71,
-        images: ["./img/2.jpg", "./img/6.jpg", "./img/7.jpg", "./img/11.jpg"],
-        other: ["Kitchen", "Wifi", "Washer", "Hangers", "Heating"],
-      },
-      {
-        id: 3,
-        lat: 59.451524,
-        lng: 24.732668,
-        adr: "Staapli 3",
-        title: "Quiet, cozy room",
-        reviews: 98,
-        rating: 4.19,
-        guests: 6,
-        beds: 3,
-        bath: 2,
-        type: "Private room",
-        price: 44,
-        images: ["./img/5.jpg", "./img/13.jpg", "./img/14.jpg", "./img/15.jpg"],
-        other: ["Free parking", "Wifi", "Washer", "Heating"],
-      },
-      {
-        id: 4,
-        lat: 59.423841,
-        lng: 24.736605,
-        adr: "Videviku 12",
-        title: "Twin rooms with shared bathroom",
-        reviews: 312,
-        rating: 4.54,
-        guests: 2,
-        beds: 1,
-        bath: 1,
-        type: "Hostel beds",
-        price: 59,
-        images: ["./img/4.jpg", "./img/9.jpg", "./img/10.jpg", "./img/16.jpg"],
-        other: ["Free parking", "Wifi"],
-      },
-    ],
+    hotels: Hotels, // Imported from ./data
   };
 
   // Marker events
@@ -111,7 +27,7 @@ class MapContainer extends React.Component {
   };
 
   onMapClicked = () => {
-    // Clear Marker on Map click
+    // Hide InfoWindow on Map click
     if (this.state.showingInfoWindow) {
       this.setState({
         showingInfoWindow: false,
@@ -119,6 +35,7 @@ class MapContainer extends React.Component {
     }
   };
 
+  // Display Map Markers
   displayMarkers = () => {
     return this.state.hotels.map((hotel, index) => {
       return (
@@ -137,7 +54,7 @@ class MapContainer extends React.Component {
           // Content of the infoWindow
           infoWindow={
             <div>
-              <div className="img" style={markerMapStyles}>
+              <div className="img">
                 <img alt={hotel.adr} src={hotel.images[0]}></img>
               </div>
               <div className="display-flex-marker">
@@ -176,7 +93,6 @@ class MapContainer extends React.Component {
         >
           {this.displayMarkers()}
           <InfoWindow
-            style={infoStyles}
             marker={this.state.activeMarker}
             visible={this.state.showingInfoWindow}
           >
