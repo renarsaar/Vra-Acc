@@ -154,10 +154,14 @@ input:focus {
   }
 }
 
-// Google map
+// Google map container
 .map-container {
   height: 90vh;
   position: relative;
+
+  .map-google > div {
+    height: 100% !important;
+  }
 }
 
 // Markers Carousel
@@ -216,7 +220,7 @@ input:focus {
   top: 0;
   right: 0;
   width: 60%;
-  height: 90%;
+  height: 100%;
   padding: 0 1rem;
   overflow: scroll;
 }
@@ -647,18 +651,12 @@ input:focus {
 
 // Footer
 .footer {
-  background-color: $secondary-color;
-  border-top: 1px solid $secondary-color;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 400;
   padding: 1rem;
-  color: $dark-color;
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  width: 100%;
-  top: 91%;
 
   a {
     i {
@@ -667,7 +665,6 @@ input:focus {
 
     &:hover {
       color: rgba($color: $dark-color, $alpha: 0.55);
-      transition: color 0.7s ease;
     }
   }
 }
