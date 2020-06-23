@@ -1,8 +1,12 @@
 import React from "react";
+import Modal from "./Modal";
 
 class HotelItem extends React.Component {
   // Image Arr from props. filterImages()
-  state = { imgs: this.props.location.state.hotelDetails.images };
+  state = {
+    imgs: this.props.location.state.hotelDetails.images,
+    showModal: false,
+  };
 
   // Render whole list to DOM
   renderHotel() {
@@ -33,11 +37,27 @@ class HotelItem extends React.Component {
           </div>
           <h4>Amenities</h4>
           <ul>{this.renderAmenities(hotel.other)}</ul>
+          <div onClick={this.showModal} className="reservation">
+            <button>Make a reservation!</button>
+          </div>
+          <Modal
+            show={this.state.showModal}
+            handleClose={this.hideModal}
+          ></Modal>
         </div>
         <div className="hotel-images">{this.renderImages(this.state.imgs)}</div>
       </div>
     );
   }
+
+  // Modal events
+  showModal = () => {
+    this.setState({ showModal: true });
+  };
+
+  hideModal = () => {
+    this.setState({ showModal: false });
+  };
 
   // Render Amenities & FA icons
   renderAmenities(amenities) {
