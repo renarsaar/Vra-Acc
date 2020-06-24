@@ -1,12 +1,16 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { Link } from "react-router-dom";
 
 import Field from "./Field";
 import Button from "./Button";
 
+let nameErr = "";
+let holderErr = "";
+let submitErr = "";
+
 class Modal extends React.Component {
   state = {
-    err: "",
     name: "",
     email: "",
     guests: null,
@@ -18,6 +22,7 @@ class Modal extends React.Component {
     expiryM: null,
     expiryY: null,
     cvv: null,
+    submit: "fail",
   };
 
   // Set state on input change, validation
@@ -29,9 +34,16 @@ class Modal extends React.Component {
     // Regex test name
     if (name === "name" || name === "holder") {
       if (!val.match(/^[a-zöäüõ\s]{0,}$/gi)) {
-        this.setState({ err: "Please enter a valid name." });
+        if (name === "name") nameErr = "Please enter a valid name.";
+        if (name === "holder") holderErr = "Please enter a valid name.";
+
+        // Clear submitErr
+        submitErr = "";
       } else {
-        this.setState({ err: "" });
+        if (name === "name") nameErr = "";
+        if (name === "holder") holderErr = "";
+
+        submitErr = "";
       }
     }
   };
@@ -55,11 +67,74 @@ class Modal extends React.Component {
     return `${year}-${month}-${day}`;
   };
 
+  // Submit form event
+  submitForm = () => {
+    if (
+      // If array full of form values has no empty values and no errors exists
+      !Object.values(this.state).includes(null) &&
+      !Object.values(this.state).includes("") &&
+      nameErr === "" &&
+      holderErr === ""
+    ) {
+      submitErr = "";
+      this.setState({ submit: "pass" });
+    } else {
+      submitErr = "Please check your fields.";
+      this.setState({ submit: "fail" });
+    }
+  };
+
+  renderSpinner() {
+    // Change loading to success
+    setTimeout(() => {
+      document.getElementById("spinner").src = "/gif/success.gif";
+    }, 2000);
+
+    // Change success gif to text
+    setTimeout(() => {
+      document.getElementById("spinner").classList.add("display-none");
+
+      document
+        .getElementById("spinner-content")
+        .classList.remove("display-none");
+    }, 4000);
+  }
+
   render() {
     // Show-Hide modal classes
     const showHideClassName = this.props.show
       ? "modal display-block"
       : "modal display-none";
+
+    if (this.state.submit === "fail") {
+      return (
+        <div className={showHideClassName}>
+          <div className="modal-main">
+            {/* Close Modal */}
+            <Button
+              btnClass="modal-btn"
+              clickEvent={this.props.handleClose}
+              text="Close"
+            />
+
+            <div onLoad={this.renderSpinner} className="spinner">
+              <div
+                className="spinner-content display-none"
+                id="spinner-content"
+              >
+                <h1>Awesome!</h1>
+                <p>Your booking has been confirmed.</p>
+                <p>Check you email for details.</p>
+                <Link className="button" to="/">
+                  OK
+                </Link>
+              </div>
+              <img alt="spinner" id="spinner" src="./gif/loading.gif"></img>
+            </div>
+          </div>
+        </div>
+      );
+    }
 
     return ReactDOM.createPortal(
       <div className={showHideClassName}>
@@ -72,9 +147,16 @@ class Modal extends React.Component {
           />
 
           {/* Error Message */}
-          <div className="red error-message">
-            {`${this.state.err ? this.state.err : ""}`}
-          </div>
+          <div className="red error-message">{`${
+            // Output all errors
+            nameErr
+              ? nameErr
+              : holderErr
+              ? holderErr
+              : submitErr
+              ? submitErr
+              : ""
+          }`}</div>
 
           <form>
             {/* Left side */}
@@ -245,8 +327,8 @@ class Modal extends React.Component {
           <Button
             btnClass="pay-btn"
             type="submit"
-            clickEvent={(e) => console.log(e.target)}
             text="Confirm and Pay"
+            clickEvent={this.submitForm}
           />
         </div>
       </div>,

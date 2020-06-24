@@ -416,7 +416,7 @@ input:focus {
 
 .modal-main {
   position: fixed;
-  background: $light-color;
+  background: #fff;
   width: 80%;
   max-height: 80%;
   top: 50%;
@@ -635,6 +635,47 @@ input:focus {
 
     &:hover {
       transform: scale(1.05);
+    }
+
+    // Payment successfull
+  }
+
+  // Spinner, Success gif
+  .spinner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 400px;
+    height: 400px;
+    margin: auto;
+
+    .spinner-content {
+      text-align: center;
+      width: 250px;
+      height: 250px;
+      margin: 2rem;
+
+      h1 {
+        display: block;
+        color: $grey-color;
+        letter-spacing: 1px;
+      }
+
+      p {
+        display: block;
+      }
+
+      .button {
+        cursor: pointer;
+        width: 100% !important;
+        border: 1px solid $primary-color;
+        padding: 0.7rem;
+        margin-top: 1.5rem;
+
+        &:focus {
+          outline: none;
+        }
+      }
     }
   }
 }
