@@ -188,8 +188,6 @@ input:focus {
 
   &::before {
     content: "";
-    // background: url("https://images.unsplash.com/photo-1518533856279-30b62c40cc30?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1928&q=80")
-    //   no-repeat center/cover;
     background: url("./404.jpg") no-repeat center/cover;
     position: absolute;
     top: 0;
@@ -280,8 +278,9 @@ input:focus {
         }
       }
 
-      ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      &:hover .hotel-item-info-price {
+      &:hover h3,
+      &:hover h4,
+      &:hover p {
         color: $primary-color;
       }
     }
@@ -483,29 +482,6 @@ input:focus {
       }
     }
 
-    // // Overlay on the Right side
-    // .overlay {
-    //   background-color: $secondary-color;
-    //   position: absolute;
-    //   width: 50%;
-    //   height: 100%;
-    //   top: 0;
-    //   left: 50%;
-    //   z-index: 2;
-
-    //   // Next-Back btn
-    //   button {
-    //     position: absolute;
-    //     bottom: 5%;
-    //     left: 50%;
-    //   }
-    // }
-
-    // .overlay.transform {
-    //   transform: translateX(-100%);
-    //   transition: transform 0.5s ease-in-out;
-    // }
-
     // Right side of the form
     .res-payment {
       width: 50%;
@@ -593,8 +569,6 @@ input:focus {
 
       // Expiry, CVC
       .card-details {
-        // display: flex;
-
         // Expiry. Left
         .left input {
           margin: 7px 4px;
@@ -636,8 +610,6 @@ input:focus {
     &:hover {
       transform: scale(1.05);
     }
-
-    // Payment successfull
   }
 
   // Spinner, Success gif
@@ -665,7 +637,7 @@ input:focus {
         display: block;
       }
 
-      .button {
+      button {
         cursor: pointer;
         width: 100% !important;
         border: 1px solid $primary-color;

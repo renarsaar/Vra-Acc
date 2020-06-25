@@ -191,7 +191,9 @@ input:focus {
           align-content: center;
           color: #2b76b3;
           font-size: 1.2rem; }
-      .hotel-item-info-about:hover .hotel-item-info-price {
+      .hotel-item-info-about:hover h3,
+      .hotel-item-info-about:hover h4,
+      .hotel-item-info-about:hover p {
         color: #2b76b3; }
     .hotel-item-info-rooms {
       margin-bottom: 2rem; }
@@ -416,13 +418,13 @@ input:focus {
         letter-spacing: 1px; }
       .modal-main .spinner .spinner-content p {
         display: block; }
-      .modal-main .spinner .spinner-content .button {
+      .modal-main .spinner .spinner-content button {
         cursor: pointer;
         width: 100% !important;
         border: 1px solid #2b76b3;
         padding: 0.7rem;
         margin-top: 1.5rem; }
-        .modal-main .spinner .spinner-content .button:focus {
+        .modal-main .spinner .spinner-content button:focus {
           outline: none; }
 
 .display-block {
