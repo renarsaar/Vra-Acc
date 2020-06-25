@@ -24,7 +24,7 @@ class Header extends React.Component {
     return (
       <div className="header">
         <div className="header-logo">
-          <Link to="/" className="fab fa-airbnb"></Link>
+          <Link to="/" className="fas fa-home"></Link>
         </div>
         <div className="header-form">
           <form onSubmit={this.onFormSubmit}>

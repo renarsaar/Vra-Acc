@@ -109,6 +109,7 @@ class Modal extends React.Component {
       ? "modal display-block"
       : "modal display-none";
 
+    // If form submitted
     if (this.state.submit === "pass") {
       return (
         <div className={showHideClassName}>
@@ -139,6 +140,7 @@ class Modal extends React.Component {
       );
     }
 
+    // Form
     return ReactDOM.createPortal(
       <div className={showHideClassName}>
         <div className="modal-main">

@@ -79,6 +79,7 @@ class MapContainer extends React.Component {
     return (
       <div className="map-container">
         <Map
+          className="map-google"
           google={this.props.google}
           fullscreenControl={false}
           streetViewControl={false}

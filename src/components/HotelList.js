@@ -105,7 +105,6 @@ class HotelList extends React.Component {
   render() {
     // Input term from Context
     const filterTerm = this.context.term;
-    console.log(filterTerm);
     if (filterTerm) {
       return (
         <div className="hotel-list">{this.renderFilteredList(filterTerm)}</div>
