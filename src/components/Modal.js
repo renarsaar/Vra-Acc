@@ -8,6 +8,8 @@ import Button from "./Button";
 let nameErr = "";
 let holderErr = "";
 let submitErr = "";
+let dateErr = "";
+let price = 0;
 
 class Modal extends React.Component {
   state = {
@@ -24,6 +26,13 @@ class Modal extends React.Component {
     cvv: null,
     submit: "fail",
   };
+
+  componentWillUnmount() {
+    // Clear errors and price
+    price = 0;
+    submitErr = "";
+    dateErr = "";
+  }
 
   // Set state on input change, validation
   formChange = (e) => {
@@ -67,16 +76,45 @@ class Modal extends React.Component {
     return `${year}-${month}-${day}`;
   };
 
+  // Calculate price based on Check-in/out
+  calculatePrice = () => {
+    // Calculate price on Check-out select
+    if (this.state.checkin) {
+      const checkInDate = new Date(this.state.checkin);
+      const checkOutDate = new Date(this.state.checkout);
+
+      // Get difference in days
+      const diffTime = Math.abs(checkOutDate - checkInDate);
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+      // Check If Check-in is in past
+      if (checkInDate > checkOutDate) {
+        dateErr = "Please check your dates.";
+      } else {
+        dateErr = "";
+      }
+
+      // Calc new price
+      const newPrice = diffDays * this.props.price * this.state.guests;
+
+      // Set new price
+      price = newPrice;
+    }
+  };
+
   // Submit form event
   submitForm = () => {
+    const checkInDate = new Date(this.state.checkin);
+    const checkOutDate = new Date(this.state.checkout);
+
     if (
       // If array full of form values has no empty values and no errors exists
       !Object.values(this.state).includes(null) &&
       !Object.values(this.state).includes("") &&
       nameErr === "" &&
-      holderErr === ""
+      holderErr === "" &&
+      dateErr === ""
     ) {
-      submitErr = "";
       this.setState({ submit: "pass" });
     } else {
       submitErr = "Please check your fields.";
@@ -104,6 +142,9 @@ class Modal extends React.Component {
   }
 
   render() {
+    // Calculate price on render.
+    this.calculatePrice();
+
     // Show-Hide modal classes
     const showHideClassName = this.props.show
       ? "modal display-block"
@@ -160,8 +201,17 @@ class Modal extends React.Component {
               ? holderErr
               : submitErr
               ? submitErr
+              : dateErr
+              ? dateErr
               : ""
           }`}</div>
+
+          {/* Price */}
+          <div className="price">
+            {`${
+              price > 0 && !isNaN(price) && !dateErr ? `Price: ${price} €` : ""
+            }`}
+          </div>
 
           <form>
             {/* Left side */}
@@ -204,7 +254,10 @@ class Modal extends React.Component {
                 onFocus={() =>
                   (document.getElementById("checkin").type = "date")
                 }
-                onChange={this.formChange}
+                onChange={(e) => {
+                  this.formChange(e);
+                  this.calculatePrice();
+                }}
                 min={this.minDate()}
                 id="checkin"
                 name="checkin"
@@ -216,7 +269,10 @@ class Modal extends React.Component {
                 onFocus={() =>
                   (document.getElementById("checkout").type = "date")
                 }
-                onChange={this.formChange}
+                onChange={(e) => {
+                  this.formChange(e);
+                  this.calculatePrice();
+                }}
                 min={this.minDate()}
                 id="checkout"
                 name="checkout"
@@ -283,6 +339,7 @@ class Modal extends React.Component {
                     name="cardnumber"
                     text="Card number"
                     type="tel"
+                    max="16"
                     placeholder="xxxx-xxxx-xxxx-xxxx"
                     onFieldChange={this.formChange}
                   />

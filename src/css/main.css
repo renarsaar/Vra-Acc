@@ -304,8 +304,11 @@ input:focus {
   .modal-main .error-message {
     position: absolute;
     left: 40%;
-    top: 20px;
-    z-index: 10; }
+    top: 20px; }
+  .modal-main .price {
+    position: absolute;
+    right: 19%;
+    top: 40px; }
   .modal-main form {
     display: flex;
     justify-content: space-around;

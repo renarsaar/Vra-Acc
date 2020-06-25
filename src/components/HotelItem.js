@@ -41,6 +41,7 @@ class HotelItem extends React.Component {
             <button>Make a reservation!</button>
           </div>
           <Modal
+            price={hotel.price}
             show={this.state.showModal}
             handleClose={this.hideModal}
           ></Modal>

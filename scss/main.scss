@@ -450,7 +450,12 @@ input:focus {
     position: absolute;
     left: 40%;
     top: 20px;
-    z-index: 10;
+  }
+
+  .price {
+    position: absolute;
+    right: 19%;
+    top: 40px;
   }
 
   // Left side form. res-details form
