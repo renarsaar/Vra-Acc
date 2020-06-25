@@ -84,20 +84,23 @@ class Modal extends React.Component {
     }
   };
 
+  // Render content on payment form success
   renderSpinner() {
     // Change loading to success
     setTimeout(() => {
       document.getElementById("spinner").src = "/gif/success.gif";
+
+      // Change success gif to text
+      setTimeout(() => {
+        document.getElementById("spinner").classList.add("display-none");
+
+        document
+          .getElementById("spinner-content")
+          .classList.remove("display-none");
+      }, 2000);
     }, 2000);
 
-    // Change success gif to text
-    setTimeout(() => {
-      document.getElementById("spinner").classList.add("display-none");
-
-      document
-        .getElementById("spinner-content")
-        .classList.remove("display-none");
-    }, 4000);
+    clearTimeout();
   }
 
   render() {
@@ -106,7 +109,7 @@ class Modal extends React.Component {
       ? "modal display-block"
       : "modal display-none";
 
-    if (this.state.submit === "fail") {
+    if (this.state.submit === "pass") {
       return (
         <div className={showHideClassName}>
           <div className="modal-main">
@@ -117,7 +120,7 @@ class Modal extends React.Component {
               text="Close"
             />
 
-            <div onLoad={this.renderSpinner} className="spinner">
+            <div onLoad={this.renderSpinner()} className="spinner">
               <div
                 className="spinner-content display-none"
                 id="spinner-content"
@@ -125,8 +128,8 @@ class Modal extends React.Component {
                 <h1>Awesome!</h1>
                 <p>Your booking has been confirmed.</p>
                 <p>Check you email for details.</p>
-                <Link className="button" to="/">
-                  OK
+                <Link to="/">
+                  <button>OK</button>
                 </Link>
               </div>
               <img alt="spinner" id="spinner" src="./gif/loading.gif"></img>
