@@ -55,7 +55,7 @@ class MapContainer extends React.Component {
           infoWindow={
             <div>
               <div className="img">
-                <img alt={hotel.adr} src={hotel.images[0]}></img>
+                <img alt={hotel.adr} src={"." + hotel.images[0]}></img>
               </div>
               <div className="display-flex-marker">
                 <div>€{hotel.price} / night</div>
