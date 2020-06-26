@@ -14,8 +14,8 @@ class App extends React.Component {
         <FilterContext>
           <Header />
           <Switch>
-            <Route path="/" exact component={MapContainer} />
-            <Route path="/hotel" component={HotelItem} />
+            <Route path="/vraa/" exact component={MapContainer} />
+            <Route path="/vraa/hotel/" exact component={HotelItem} />
             <Route component={NoMatch} />
           </Switch>
           <Footer />
