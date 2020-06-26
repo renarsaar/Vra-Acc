@@ -12,7 +12,7 @@ export const Hotels = [
     bath: 1,
     type: "Entire apartment",
     price: 195,
-    images: ["./img/1.jpg", "./img/3.jpg", "./img/8.jpg", "./img/12.jpg"],
+    images: ["/img/1.jpg", "/img/3.jpg", "/img/8.jpg", "/img/12.jpg"],
     other: [
       "Free parking",
       "Kitchen",
@@ -37,7 +37,7 @@ export const Hotels = [
     bath: 1,
     type: "Entire house",
     price: 71,
-    images: ["./img/2.jpg", "./img/6.jpg", "./img/7.jpg", "./img/11.jpg"],
+    images: ["/img/2.jpg", "/img/6.jpg", "/img/7.jpg", "/img/11.jpg"],
     other: ["Kitchen", "Wifi", "Washer", "Hangers", "Heating"],
   },
   {
@@ -53,7 +53,7 @@ export const Hotels = [
     bath: 2,
     type: "Private room",
     price: 44,
-    images: ["./img/5.jpg", "./img/13.jpg", "./img/14.jpg", "./img/15.jpg"],
+    images: ["/img/5.jpg", "/img/13.jpg", "/img/14.jpg", "/img/15.jpg"],
     other: ["Free parking", "Wifi", "Washer", "Heating"],
   },
   {
@@ -69,7 +69,7 @@ export const Hotels = [
     bath: 1,
     type: "Hostel beds",
     price: 59,
-    images: ["./img/4.jpg", "./img/9.jpg", "./img/10.jpg", "./img/16.jpg"],
+    images: ["/img/4.jpg", "/img/9.jpg", "/img/10.jpg", "/img/16.jpg"],
     other: ["Free parking", "Wifi"],
   },
 ];

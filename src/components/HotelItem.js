@@ -100,7 +100,7 @@ class HotelItem extends React.Component {
       return (
         <img
           onClick={() => this.filterImages(img)}
-          src={img}
+          src={".." + img}
           alt={img}
           key={img}
         />

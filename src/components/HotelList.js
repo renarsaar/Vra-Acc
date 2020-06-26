@@ -47,7 +47,7 @@ class HotelList extends React.Component {
             <Link
               className="hotel-item-info-about"
               to={{
-                pathname: "/hotel",
+                pathname: "/vraa/hotel/",
                 state: {
                   hotelDetails: hotel,
                 },
@@ -96,7 +96,7 @@ class HotelList extends React.Component {
     return images.map((image) => {
       return (
         <div key={adrs}>
-          <img alt={adrs} src={image}></img>
+          <img alt={adrs} src={"." + image}></img>
         </div>
       );
     });

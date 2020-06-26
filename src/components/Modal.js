@@ -104,9 +104,6 @@ class Modal extends React.Component {
 
   // Submit form event
   submitForm = () => {
-    const checkInDate = new Date(this.state.checkin);
-    const checkOutDate = new Date(this.state.checkout);
-
     if (
       // If array full of form values has no empty values and no errors exists
       !Object.values(this.state).includes(null) &&
@@ -126,7 +123,7 @@ class Modal extends React.Component {
   renderSpinner() {
     // Change loading to success
     setTimeout(() => {
-      document.getElementById("spinner").src = "/gif/success.gif";
+      document.getElementById("spinner").src = "../gif/success.gif";
 
       // Change success gif to text
       setTimeout(() => {
@@ -170,11 +167,11 @@ class Modal extends React.Component {
                 <h1>Awesome!</h1>
                 <p>Your booking has been confirmed.</p>
                 <p>Check you email for details.</p>
-                <Link to="/">
+                <Link to="/vraa/">
                   <button>OK</button>
                 </Link>
               </div>
-              <img alt="spinner" id="spinner" src="./gif/loading.gif"></img>
+              <img alt="spinner" id="spinner" src="../gif/loading.gif"></img>
             </div>
           </div>
         </div>
