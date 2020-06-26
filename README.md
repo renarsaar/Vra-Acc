@@ -35,4 +35,4 @@ Data of this project is static, located in data folder
 |   |-- index.js
 ```
 
-The Project is live at: [vra.ee/Accommodation](https://vra.ee/vraa/)
+The Project is live at: [vra.ee/vraa](https://vra.ee/vraa/)
