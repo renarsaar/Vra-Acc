@@ -663,7 +663,8 @@ input:focus {
 
       .price {
         position: absolute;
-        top: 0;
+        color: $dark-color;
+        top: -45px;
         left: 0;
       }
 
@@ -725,6 +726,7 @@ input:focus {
           }
 
           &.invalid:hover {
+            cursor: default;
             color: $error-color;
             border: 2px solid $error-color;
             transition: color 0.2s ease-in-out, border 0.2s ease-in-out, ;

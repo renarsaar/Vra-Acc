@@ -451,7 +451,8 @@ input:focus {
           margin-right: 2rem; }
       .modal .modal-main form .price, .modal .modal-main .success .price, .modal .modal-main .confirm .price {
         position: absolute;
-        top: 0;
+        color: #333;
+        top: -45px;
         left: 0; }
       .modal .modal-main form label, .modal .modal-main .success label, .modal .modal-main .confirm label {
         position: relative;
@@ -495,6 +496,7 @@ input:focus {
             border: 2px solid #07c800;
             transition: color 0.2s ease-in-out, border 0.2s ease-in-out; }
           .modal .modal-main form .step button.invalid:hover, .modal .modal-main .success .step button.invalid:hover, .modal .modal-main .confirm .step button.invalid:hover {
+            cursor: default;
             color: #ff0000;
             border: 2px solid #ff0000;
             transition: color 0.2s ease-in-out, border 0.2s ease-in-out; }
