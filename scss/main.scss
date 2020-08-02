@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Arvo&family=Indie+Flower&family=Source+Sans+Pro&family=Lato&display=swap");
 
+$primary-color: #0e99d5;
 $secondary-color: #7aa0be;
 $error-color: #ff0000;
 $success-color: #07c800;
@@ -9,11 +10,6 @@ $medium-color: #e2e2e2;
 $grey-color: #858585;
 $darker-color: #717981;
 $dark-color: #333;
-$font: "Lato", sans-serif;
-$large-font: 2.2rem;
-$regular-font: 1.5rem;
-
-$blue-color: #0e99d5;
 
 * {
   box-sizing: border-box;
@@ -22,7 +18,7 @@ $blue-color: #0e99d5;
 body {
   background-color: $light-color;
   color: $dark-color;
-  font-family: $font;
+  font-family: "Lato", sans-serif;
   max-height: 90vh;
   max-width: 100vw;
   margin: 0;
@@ -113,8 +109,8 @@ input:focus {
   transition: color 0.2s ease, border 0.2s ease;
 
   &:hover {
-    color: $blue-color;
-    border: 2px solid $blue-color;
+    color: $primary-color;
+    border: 2px solid $primary-color;
     transition: color 0.2s ease-in-out, border 0.2s ease-in-out;
   }
 
@@ -132,42 +128,43 @@ input:focus {
   font-weight: 500;
 
   .star {
-    color: $blue-color;
+    color: $primary-color;
     font-size: 1.2rem;
     margin-bottom: 0.4rem;
     margin-right: 0.2rem;
-  }
-}
-
-.flex {
+  } 
+} 
+ 
+.flex { 
   display: flex;
-  justify-content: space-around;
-  align-items: center;
-
-  p {
+  justify-content: space-around; 
+  align-items: center; 
+ 
+  p { 
     margin: 0.3rem 0.3rem 0.5rem 0;
   }
-}
+} 
 
-// Header
+// Header   
 .header {
+  background: $light-color;
   display: flex;
   justify-content: space-around;
   align-items: center;
   width: 100%;
-  font-size: $large-font;
+  font-size: 2.2rem; 
   padding: 0.5rem 1.5rem;
 
   &-logo {
     font-size: 3rem;
-    color: $blue-color;
+    color: $primary-color;
   }
 
-  &-form {
-    form {
+  &-form { 
+    form {   
       display: flex;
 
-      .search-btn {
+      .search-btn { 
         cursor: pointer;
         border-left: 0;
         border-radius: 0;
@@ -196,24 +193,24 @@ input:focus {
   }
 
   &-text {
-    color: $blue-color;
+    color: $primary-color;
   }
 }
 
-// Google map container
-.map-container {
+// Google map container 
+.map-container {  
   height: 90vh;
   position: relative;
 
-  .map-google > div {
-    height: 100% !important;
-  }
+  .map-google > div {  
+    height: 100% !important;  
+  }     
 }
 
-// Markers Carousel
-.img img {
-  width: 300px;
-  height: 200px;
+// Markers Carousel 
+.img img {  
+  width: 300px;  
+  height: 200px; 
 }
 
 // 404 page
@@ -270,56 +267,53 @@ input:focus {
 }
 
 // Single hotel item
-.hotel-item {
-  border-top: 1px solid $blue-color;
+.hotel-item { 
+  background: $lighter-color;
+  box-shadow: 0px 2px 6px 0px  rgba($color: $grey-color, $alpha: 0.4);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: 1rem 0;
   padding: 1rem;
   width: 100%;
-
-  &:last-child {
-    border-bottom: 1px solid $blue-color;
-  }
 
   // hotel-item-info
   &-info {
     width: 100%;
-    margin-right: 1rem;
-
-    // hotel-item-info-about
-    &-about {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      width: 100%;
-
-      .location {
-        h3 {
-          margin-top: 0 auto;
+    margin-right: 1rem;  
+    
+    // hotel-item-info-about  
+    &-about {  
+      display: flex;  
+      justify-content: space-between;  
+      align-items: center; 
+      width: 100%;  
+     
+      .location {     
+        h3 {  
+          margin-top: 0 auto;    
         }
-
-        h4 {
-          margin: 0 0 0.7rem -0.5rem;
-          text-align: center;
-        }
+     
+        h4 {   
+          margin: 0 0 0.7rem -0.5rem;   
+          text-align: center;  
+        } 
       }
-
+     
       .review {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        margin-bottom: 3.6rem;
-
-        p {
+        display: flex;     
+        justify-content: flex-end; 
+        align-items: center;  
+        margin-bottom: 3.6rem;  
+ 
+        p {   
           margin: 0 0.3rem;
-          // padding: 0 0.3rem;
-        }
+        } 
 
         .star {
           padding-bottom: 6px;
           align-content: center;
-          color: $blue-color;
+          color: $primary-color;
           font-size: 1.2rem;
         }
       }
@@ -327,7 +321,7 @@ input:focus {
       &:hover h3,
       &:hover h4,
       &:hover p {
-        color: $blue-color;
+        color: $primary-color;
       }
     }
 
@@ -357,8 +351,8 @@ input:focus {
   }
 }
 
-// HotelItem Single
-.hotel {
+// HotelItem
+.hotel {   
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -368,7 +362,6 @@ input:focus {
   &-info {
     margin: 1rem;
     width: 50vw;
-    height: 73vh;
     overflow: scroll;
 
     &::-webkit-scrollbar {
@@ -377,8 +370,8 @@ input:focus {
 
     .price-review,
     .location-type {
-      display: flex;
-      justify-content: space-between;
+      display: flex; 
+      justify-content: space-between; 
       margin-right: 1rem;
     }
 
@@ -391,7 +384,7 @@ input:focus {
         padding: 5px;
 
         i {
-          color: $blue-color;
+          color: $primary-color;
           width: 15px;
           height: 15px;
           margin-right: 15px;
@@ -411,21 +404,21 @@ input:focus {
         transition: color 0.2s ease-in-out, border 0.2s ease-in-out;
       }
     }
-  }
-
-  // hotel-images
+  } 
+   
+  // hotel-images   
   &-images {
     margin: auto;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 15px;
+    display: grid; 
+    grid-template-columns: repeat(3, 1fr);    
+    grid-gap: 15px; 
 
-    img {
+    img { 
       cursor: pointer;
       width: 140px;
-      height: 110px;
-      display: inline-block;
-    }
+      height: 110px;  
+      display: inline-block;  
+    } 
 
     img:first-child {
       width: 460px;
@@ -513,7 +506,7 @@ input:focus {
 
       &:hover {
         &:before, &:after {
-          background-color: $blue-color;
+          background-color: $primary-color;
           transition: background-color 0.2s ease-in-out;
         }
       }
@@ -543,7 +536,7 @@ input:focus {
           top: 50%;
           left: 50%;
           transform: translate(-50%, -50%);
-          background: $blue-color;
+          background: $primary-color;
           border-radius: 50%;
           z-index: -2;
           transition: background 0.3s ease;
@@ -566,7 +559,6 @@ input:focus {
       width: 75%;
       height: 300px;
       margin: auto;
-      // margin-top: 4rem;
       
       .card {
         position: relative;
@@ -597,10 +589,10 @@ input:focus {
         }
 
         &.active {
-          border: 2px solid $blue-color;
+          border: 2px solid $primary-color;
 
           i {
-            color: $blue-color;
+            color: $primary-color;
           }
 
           p {
@@ -613,9 +605,9 @@ input:focus {
             align-items: center;
             font-size: 1.7rem;
             font-weight: bold;
-            color: $blue-color;
+            color: $primary-color;
             background: $light-color;
-            border: 2px solid $blue-color;
+            border: 2px solid $primary-color;
             border-radius: 50%;
             position: absolute;
             content: "\2713";
@@ -699,7 +691,7 @@ input:focus {
         height: 2.5rem;
 
         &:focus {
-          border: 2px solid $blue-color;
+          border: 2px solid $primary-color;
         }
 
         &::placeholder {
@@ -739,7 +731,7 @@ input:focus {
         
         li {
           margin-bottom: 0.8rem;
-          background: rgba($color: $blue-color, $alpha: 0.05);
+          background: rgba($color: $primary-color, $alpha: 0.05);
           padding: 0.35rem;
           font-size: 0.8rem;
           letter-spacing: 0.070rem;
@@ -764,12 +756,14 @@ input:focus {
   align-items: center;
 
   a {
-    i {
+    i {  
       padding-left: 0.4rem;
-    }
+    } 
 
     &:hover {
       color: rgba($color: $dark-color, $alpha: 0.55);
     }
   }
 }
+
+@import './media';
