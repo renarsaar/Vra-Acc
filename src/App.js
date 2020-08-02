@@ -3,7 +3,6 @@ import { Switch, Route } from 'react-router-dom';
 
 import Header from './components/Header';
 import MapContainer from './components/MapContainer';
-import Footer from './components/Footer';
 import HotelItem from './components/HotelItem';
 import { FilterContext } from './contexts/FilterContext';
 
@@ -22,18 +21,15 @@ const NoMatch = ({ location }) => (
 
 export default function App() {
   return (
-    <div>
-      <div>
-        <FilterContext>
-          <Header />
-          <Switch>
-            <Route path="/" exact component={MapContainer} />
-            <Route path="/hotel/" component={HotelItem} />
-            <Route component={NoMatch} />
-          </Switch>
-          <Footer />
-        </FilterContext>
-      </div>
-    </div>
+    <>
+      <FilterContext>
+        <Header />
+        <Switch>
+          <Route path="/" exact component={MapContainer} />
+          <Route path="/hotel/" component={HotelItem} />
+          <Route component={NoMatch} />
+        </Switch>
+      </FilterContext>
+    </>
   );
 }
