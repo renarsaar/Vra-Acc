@@ -151,7 +151,9 @@ class Modal extends React.Component {
           ? 'Expiration date is required.'
           : !expiryMRegex.test(value)
             ? 'Invalid expiry date'
-            : '';
+            : value > 12
+              ? 'Invalid expiry date'
+              : '';
         break;
 
       case 'expiryY':
