@@ -163,6 +163,11 @@
   
       .img {
         object-fit: cover !important;
+        height: 300px !important;
+
+        img {
+          height: 300px !important;
+        }
       }
     }
 
@@ -194,6 +199,27 @@
       .hotel-item {
         .img {
           width: inherit !important;
+          height: 250px !important;
+
+          img {
+            height: 250px !important;
+          }
+        }
+      }
+    } 
+  }
+}
+
+@media (max-width: 375px) { 
+  .map-container {
+    .hotel-list {
+      .hotel-item {
+        .img {
+          height: 210px !important;
+
+          img {
+            height: 210px !important;
+          }
         }
       }
     } 

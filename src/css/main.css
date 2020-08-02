@@ -621,7 +621,10 @@ input:focus {
       margin-right: 0;
       margin-bottom: 1.5rem; }
     .map-container .hotel-list .hotel-item .img {
-      object-fit: cover !important; }
+      object-fit: cover !important;
+      height: 300px !important; }
+      .map-container .hotel-list .hotel-item .img img {
+        height: 300px !important; }
   .map-container .map-google > div {
     padding: 0 1rem;
     margin: 0 auto;
@@ -638,4 +641,13 @@ input:focus {
   .map-container .hotel-list {
     margin-top: 85vh !important; }
     .map-container .hotel-list .hotel-item .img {
-      width: inherit !important; } }
+      width: inherit !important;
+      height: 250px !important; }
+      .map-container .hotel-list .hotel-item .img img {
+        height: 250px !important; } }
+
+@media (max-width: 375px) {
+  .map-container .hotel-list .hotel-item .img {
+    height: 210px !important; }
+    .map-container .hotel-list .hotel-item .img img {
+      height: 210px !important; } }

@@ -352,30 +352,30 @@ input:focus {
 }
 
 // HotelItem
-.hotel {   
+.hotel {    
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 1rem;
-
+ 
   // hotel-info
-  &-info {
-    margin: 1rem;
+  &-info { 
+    margin: 1rem; 
     width: 50vw;
     overflow: scroll;
-
+ 
     &::-webkit-scrollbar {
-      display: none;
+      display: none; 
     }
-
+ 
     .price-review,
-    .location-type {
+    .location-type {  
       display: flex; 
       justify-content: space-between; 
-      margin-right: 1rem;
+      margin-right: 1rem; 
     }
 
-    ul {
+    ul { 
       columns: 2;
 
       li {
