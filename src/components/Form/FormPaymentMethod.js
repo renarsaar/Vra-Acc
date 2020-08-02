@@ -2,11 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ProgressBar from './ProgressBar';
 
-export default function FormPaymentMethod({ showHideClassName, nextStep, prevStep, handleChange, handleClose, values, errors }) {
+export default function FormPaymentMethod({
+  showHideClassName, nextStep, prevStep, handleChange, handleClose, values, errors,
+}) {
   return ReactDOM.createPortal(
     <div className={showHideClassName}>
       <div className="modal-main">
-        <button className="close-modal" onClick={handleClose}></button>
+        <button type="button" className="close-modal" onClick={handleClose} />
         <div className="progress-container">
           <ProgressBar values={values} errors={errors} />
           <div className="progress-step">5</div>
@@ -15,21 +17,21 @@ export default function FormPaymentMethod({ showHideClassName, nextStep, prevSte
 
         <h1>Select Your Payment Mehtod</h1>
         <div className="payment-method">
-          <div onClick={handleChange('credit')} className={values.paymentMethod === 'credit' ? 'card active' : 'card'}>
-            <i className="far fa-credit-card fa-3x"></i>
+          <button type="button" onClick={handleChange('credit')} className={values.paymentMethod === 'credit' ? 'card active' : 'card'}>
+            <i className="far fa-credit-card fa-3x" />
             <p>Pay with Credit Card</p>
-          </div>
+          </button>
 
-          <div onClick={handleChange('paypal')} className={values.paymentMethod === 'paypal' ? 'card active' : 'card'}>
-            <i className="fab fa-paypal fa-3x"></i>
+          <button type="button" onClick={handleChange('paypal')} className={values.paymentMethod === 'paypal' ? 'card active' : 'card'}>
+            <i className="fab fa-paypal fa-3x" />
             <p>Pay with PayPal</p>
-          </div>
+          </button>
 
-          <button onClick={prevStep}>Go Back</button>
-          <button onClick={nextStep}>Continue</button>
+          <button type="button" onClick={prevStep}>Go Back</button>
+          <button type="button" onClick={nextStep}>Continue</button>
         </div>
       </div>
-    </div >,
-    document.getElementById('modal')
-  )
+    </div>,
+    document.getElementById('modal'),
+  );
 }

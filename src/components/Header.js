@@ -1,7 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import FilterContext from "../contexts/FilterContext";
+import FilterContext from '../contexts/FilterContext';
 
 class Header extends React.Component {
   static contextType = FilterContext;
@@ -14,18 +14,15 @@ class Header extends React.Component {
     this.context.onTermChange(this.state.term);
   };
 
+  // Handle input change
   onInputChange = (e) => {
     this.setState({ term: e.target.value });
-    // // Live search
-    // this.context.onTermChange(this.state.term);
   };
 
   render() {
     return (
       <div className="header">
-        <div className="header-logo">
-          <Link to="/vraa/" className="fas fa-home"></Link>
-        </div>
+        <Link to="/" className="header-text">VRA Accommodations</Link>
         <div className="header-form">
           <form onSubmit={this.onFormSubmit}>
             <input
@@ -38,7 +35,6 @@ class Header extends React.Component {
             </button>
           </form>
         </div>
-        <div className="header-text">VRA Accommodations</div>
       </div>
     );
   }

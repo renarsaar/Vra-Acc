@@ -5,23 +5,23 @@ import ProgressBar from './ProgressBar';
 // Restrict past dates
 function minDate() {
   const date = new Date();
-  const dateTimeFormat = new Intl.DateTimeFormat("en", {
-    year: "numeric",
-    month: "2-digit",
-    day: "2-digit",
+  const dateTimeFormat = new Intl.DateTimeFormat('en', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
   });
   const [
-    { value: month },
-    ,
-    { value: day },
-    ,
+    { value: month }, ,
+    { value: day }, ,
     { value: year },
   ] = dateTimeFormat.formatToParts(date);
 
   return `${year}-${month}-${day}`;
-};
+}
 
-export default function FormDateDetails({ showHideClassName, nextStep, prevStep, handleClose, handleChange, handleValidation, calculatePrice, values, errors }) {
+export default function FormDateDetails({
+  showHideClassName, nextStep, prevStep, handleClose, handleChange, handleValidation, calculatePrice, values, errors,
+}) {
   // Handle form change and calculate price
   function handleDates(e) {
     handleValidation(e);
@@ -32,7 +32,7 @@ export default function FormDateDetails({ showHideClassName, nextStep, prevStep,
   return ReactDOM.createPortal(
     <div className={showHideClassName}>
       <div className="modal-main">
-        <button className="close-modal" onClick={handleClose}></button>
+        <button type="button" className="close-modal" onClick={handleClose} />
         <div className="progress-container">
           <ProgressBar values={values} errors={errors} />
           <div className="progress-step">5</div>
@@ -41,12 +41,13 @@ export default function FormDateDetails({ showHideClassName, nextStep, prevStep,
 
         <form>
           <label htmlFor={values.checkIn}>
-            Check In Date<span className="isrequired">*</span>
+            Check In Date
+            <span className="isrequired">*</span>
             <p className="form-error">{errors.checkIn ? errors.checkIn : ''}</p>
           </label>
           <input
             className={errors.checkIn ? 'error-border' : ''}
-            type='date'
+            type="date"
             name="checkIn"
             value={values.checkIn}
             onChange={handleChange}
@@ -55,12 +56,13 @@ export default function FormDateDetails({ showHideClassName, nextStep, prevStep,
           />
 
           <label htmlFor={values.checkOut}>
-            Check Out Date<span className="isrequired">*</span>
+            Check Out Date
+            <span className="isrequired">*</span>
             <p className="form-error">{errors.checkOut ? errors.checkOut : ''}</p>
           </label>
           <input
             className={errors.checkOut ? 'error-border' : ''}
-            type='date'
+            type="date"
             name="checkOut"
             value={values.checkOut}
             onChange={handleChange}
@@ -68,12 +70,12 @@ export default function FormDateDetails({ showHideClassName, nextStep, prevStep,
             min={minDate()}
           />
           <div className="step">
-            <button onClick={prevStep}>Go Back</button>
-            <button onClick={nextStep}>Continue</button>
+            <button type="button" onClick={prevStep}>Go Back</button>
+            <button type="button" onClick={nextStep}>Continue</button>
           </div>
         </form>
       </div>
     </div>,
-    document.getElementById("modal")
-  )
+    document.getElementById('modal'),
+  );
 }

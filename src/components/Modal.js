@@ -1,4 +1,5 @@
 import React from 'react';
+
 import FormPersonalDetails from './Form/FormPersonalDetails';
 import FormDateDetails from './Form/FormDateDetails';
 import FormPaymentMethod from './Form/FormPaymentMethod';
@@ -36,16 +37,14 @@ class Modal extends React.Component {
   // Clear Form Step
   componentWillUnmount() {
     this.setState({ step: 1 })
-  }
+  };
 
   // Proceed to next Step
   nextStep = (e) => {
     e.preventDefault();
     const { step } = this.state;
 
-    this.setState({
-      step: step + 1,
-    })
+    this.setState({ step: step + 1 });
   };
 
   // Go back to previous Step
@@ -53,9 +52,7 @@ class Modal extends React.Component {
     e.preventDefault();
     const { step } = this.state;
 
-    this.setState({
-      step: step - 1,
-    })
+    this.setState({ step: step - 1 });
   };
 
   // Handle fields change
@@ -177,7 +174,7 @@ class Modal extends React.Component {
         break;
     }
 
-    this.setState({ formErrors })
+    this.setState({ formErrors });
   }
 
   render() {

@@ -1,14 +1,105 @@
-import React from "react";
-import Modal from "./Modal";
+import React from 'react';
+import Modal from './Modal';
 
 class HotelItem extends React.Component {
-  // Image Arr from props. filterImages()
   state = {
     imgs: this.props.location.state.hotelDetails.images,
     showModal: false,
   };
 
-  // Render whole list to DOM
+  // Show modal
+  showModal = () => {
+    this.setState({ showModal: true });
+  };
+
+  // Hide modal
+  hideModal = () => {
+    this.setState({ showModal: false });
+  };
+
+  // Render Amenities & FA icons
+  renderAmenities(amenities) {
+    return amenities.map((amenity) => {
+      if (amenity === 'Wifi') {
+        return (
+          <li key={amenity}>
+            <i className="fas fa-wifi" />
+            {amenity}
+          </li>
+        );
+      }
+
+      if (amenity === 'Free parking') {
+        return (
+          <li key={amenity}>
+            <i className="fas fa-parking" />
+            {amenity}
+          </li>
+        );
+      }
+
+      if (amenity === 'Kitchen') {
+        return (
+          <li key={amenity}>
+            <i className="fas fa-utensils" />
+            {amenity}
+          </li>
+        );
+      }
+
+      if (amenity === 'Animals allowed') {
+        return (
+          <li key={amenity}>
+            <i className="fas fa-cat" />
+            {amenity}
+          </li>
+        );
+      }
+
+      if (amenity === 'Heating') {
+        return (
+          <li key={amenity}>
+            <i className="fas fa-temperature-high" />
+            {amenity}
+          </li>
+        );
+      }
+
+      return <li key={amenity}>{amenity}</li>;
+    });
+  }
+
+  // Filter images order
+  filterImages(selectedImage) {
+    const imageArr = this.state.imgs;
+
+    // Get the index of selected image
+    const selectedIndex = imageArr.findIndex(
+      (image) => image === selectedImage
+    );
+
+    // Swap state array elements
+    const firstArrEl = imageArr[0];
+    imageArr[0] = selectedImage;
+    imageArr[selectedIndex] = firstArrEl;
+
+    this.setState({ imgs: imageArr });
+  }
+
+
+  // Render Image section
+  renderImages(images) {
+    return images.map((image) => (
+      <img
+        onClick={() => this.filterImages(image)}
+        src={`..${image}`}
+        alt={image}
+        key={image}
+      />
+    ));
+  }
+
+  // Rended Content
   renderHotel() {
     const hotel = this.props.location.state.hotelDetails;
 
@@ -36,94 +127,25 @@ class HotelItem extends React.Component {
             <h4>Price: €{hotel.price} / night</h4>
           </div>
           <h4>Amenities</h4>
-          <ul>{this.renderAmenities(hotel.other)}</ul>
-          <div onClick={this.showModal} className="reservation">
-            <button>Make a reservation!</button>
+          <ul>
+            {this.renderAmenities(hotel.other)}
+          </ul>
+          <div className="reservation">
+            <button type="button" onClick={this.showModal}>Make a reservation!</button>
           </div>
           <Modal
             price={hotel.price}
+            location={hotel.adr}
+            title={hotel.title}
             show={this.state.showModal}
             handleClose={this.hideModal}
-          ></Modal>
+          />
         </div>
-        <div className="hotel-images">{this.renderImages(this.state.imgs)}</div>
+        <div className="hotel-images">
+          {this.renderImages(this.state.imgs)}
+        </div>
       </div>
     );
-  }
-
-  // Modal events
-  showModal = () => {
-    this.setState({ showModal: true });
-  };
-
-  hideModal = () => {
-    this.setState({ showModal: false });
-  };
-
-  // Render Amenities & FA icons
-  renderAmenities(amenities) {
-    return amenities.map((amn) => {
-      return amn === "Wifi" ? (
-        <li key={amn}>
-          <i className="fas fa-wifi" />
-          {amn}
-        </li>
-      ) : amn === "Free parking" ? (
-        <li key={amn}>
-          <i className="fas fa-parking" />
-          {amn}
-        </li>
-      ) : amn === "Kitchen" ? (
-        <li key={amn}>
-          <i className="fas fa-utensils" />
-          {amn}
-        </li>
-      ) : amn === "Animals allowed" ? (
-        <li key={amn}>
-          <i className="fas fa-cat" />
-          {amn}
-        </li>
-      ) : amn === "Heating" ? (
-        <li key={amn}>
-          <i className="fas fa-temperature-high" />
-          {amn}
-        </li>
-      ) : (
-        <li key={amn}>{amn}</li>
-      );
-    });
-  }
-
-  // Render Image section
-  renderImages(images) {
-    return images.map((img) => {
-      return (
-        <img
-          onClick={() => this.filterImages(img)}
-          src={".." + img}
-          alt={img}
-          key={img}
-        />
-      );
-    });
-  }
-
-  // Filter onClick
-  filterImages(selectedImage) {
-    // Image Elements Arr
-    const imageArr = this.state.imgs;
-
-    // Get the index of selected image
-    const selectedIndex = imageArr.findIndex(
-      (image) => image === selectedImage
-    );
-
-    // Swap state array elements
-    const firstArrEl = imageArr[0];
-    imageArr[0] = selectedImage;
-    imageArr[selectedIndex] = firstArrEl;
-
-    this.setState({ imgs: imageArr });
   }
 
   render() {

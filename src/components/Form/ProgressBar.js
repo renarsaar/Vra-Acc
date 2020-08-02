@@ -24,5 +24,5 @@ export default function ProgressBar({ values, errors }) {
       <div className={handleClassNames(['paymentMethod'])}>3</div>
       <div className={handleClassNames(['cardHolder', 'cardNumber', 'expiryM', 'expiryY', 'cvv'])}>4</div>
     </>
-  )
+  );
 }

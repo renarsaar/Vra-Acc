@@ -2,29 +2,31 @@ import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import ProgressBar from './ProgressBar';
 
-export default function Confirm({ showHideClassName, nextStep, prevStep, handleClose, values, errors }) {
+export default function Confirm({
+  showHideClassName, nextStep, prevStep, handleClose, values, errors,
+}) {
   const [valid, setValid] = useState(true);
 
   useEffect(() => {
     // Validate forms inputs are filled out
-    Object.values(values).forEach(val => {
+    Object.values(values).forEach((val) => {
       val === '' && (setValid(false));
-    })
+    });
 
     // Validate form errors are empty
-    Object.values(errors).forEach(err => {
+    Object.values(errors).forEach((err) => {
       err !== '' && (setValid(false));
-    })
+    });
 
     return () => {
-      setValid(false)
-    }
-  })
+      setValid(false);
+    };
+  });
 
   return ReactDOM.createPortal(
     <div className={showHideClassName}>
       <div className="modal-main">
-        <button className="close-modal" onClick={handleClose}></button>
+        <button type="button" className="close-modal" onClick={handleClose} />
         <div className="progress-container">
           <ProgressBar values={values} errors={errors} />
           <div className="progress-step">5</div>
@@ -33,15 +35,7 @@ export default function Confirm({ showHideClassName, nextStep, prevStep, handleC
 
         <div className="confirm">
           <ul>
-            <li>
-              Location:
-              <span>
-                {values.location}
-                (
-                  {values.title}
-                )
-              </span>
-            </li>
+            <li>Location: <span>{values.location}({values.title})</span></li>
             <li>Name: <span>{values.fullName}</span></li>
             <li>Email: <span>{values.email}</span></li>
             <li>Number of Guests: <span>{values.guests}</span></li>
@@ -51,8 +45,9 @@ export default function Confirm({ showHideClassName, nextStep, prevStep, handleC
           </ul>
 
           <div className="step">
-            <button onClick={prevStep}>Go Back</button>
+            <button type="button" onClick={prevStep}>Go Back</button>
             <button
+              type="button"
               className={!valid ? 'invalid' : 'valid'}
               disabled={!valid ? 'disabled' : ''}
               onClick={nextStep}
@@ -63,6 +58,6 @@ export default function Confirm({ showHideClassName, nextStep, prevStep, handleC
         </div>
       </div>
     </div>,
-    document.getElementById("modal")
-  )
+    document.getElementById('modal'),
+  );
 }

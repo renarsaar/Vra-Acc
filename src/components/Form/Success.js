@@ -21,11 +21,11 @@ export default function Success({ showHideClassName, values, errors }) {
             You will recieve a confirmation Email shortly.
           </h4>
           <Link to="/" className="step">
-            <button>Back home</button>
+            <button type="button">Back home</button>
           </Link>
         </div>
       </div>
     </div>,
-    document.getElementById("modal")
-  )
+    document.getElementById('modal'),
+  );
 }

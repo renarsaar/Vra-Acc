@@ -2,20 +2,23 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ProgressBar from './ProgressBar';
 
-export default function FormPersonalDetails({ values, handleChange, handleClose, handleValidation, showHideClassName, nextStep, errors }) {
+export default function FormPersonalDetails({
+  values, handleChange, handleClose, handleValidation, showHideClassName, nextStep, errors,
+}) {
   return ReactDOM.createPortal(
     <div className={showHideClassName}>
       <div className="modal-main">
-        <button className="close-modal" onClick={handleClose}></button>
+        <button type="button" className="close-modal" onClick={handleClose} />
         <div className="progress-container">
           <ProgressBar values={values} errors={errors} />
           <div className="progress-step">5</div>
           <div className="progress-step">6</div>
         </div>
 
-        <form onKeyDown={(e) => { return e.keyCode !== 13 }}>
+        <form>
           <label htmlFor="name">
-            Name<span className="isrequired">*</span>
+            Name
+            <span className="isrequired">*</span>
             <p className="form-error">{errors.fullName ? errors.fullName : ''}</p>
           </label>
           <input
@@ -28,7 +31,8 @@ export default function FormPersonalDetails({ values, handleChange, handleClose,
           />
 
           <label htmlFor="email">
-            Email<span className="isrequired">*</span>
+            Email
+            <span className="isrequired">*</span>
             <p className="form-error">{errors.email ? errors.email : ''}</p>
           </label>
           <input
@@ -41,7 +45,8 @@ export default function FormPersonalDetails({ values, handleChange, handleClose,
           />
 
           <label htmlFor="guests">
-            Number of guests<span className="isrequired">*</span>
+            Number of guests
+            <span className="isrequired">*</span>
             <p className="form-error">{errors.guests ? errors.guests : ''}</p>
           </label>
           <input
@@ -53,11 +58,11 @@ export default function FormPersonalDetails({ values, handleChange, handleClose,
             onBlur={handleValidation}
           />
           <div className="step">
-            <button onClick={nextStep}>Continue</button>
+            <button type="button" onClick={nextStep}>Continue</button>
           </div>
         </form>
       </div>
     </div>,
-    document.getElementById("modal")
-  )
+    document.getElementById('modal'),
+  );
 }

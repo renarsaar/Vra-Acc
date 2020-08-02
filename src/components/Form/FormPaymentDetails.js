@@ -2,11 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ProgressBar from './ProgressBar';
 
-export default function FormPaymentDetails({ showHideClassName, nextStep, prevStep, handleClose, handleChange, handleValidation, values, errors }) {
+export default function FormPaymentDetails({
+  showHideClassName, nextStep, prevStep, handleClose, handleChange, handleValidation, values, errors,
+}) {
   return ReactDOM.createPortal(
     <div className={showHideClassName}>
       <div className="modal-main">
-        <button className="close-modal" onClick={handleClose}></button>
+        <button type="button" className="close-modal" onClick={handleClose} />
         <div className="progress-container">
           <ProgressBar values={values} errors={errors} />
           <div className="progress-step">5</div>
@@ -16,7 +18,8 @@ export default function FormPaymentDetails({ showHideClassName, nextStep, prevSt
         <form>
           <h3 className="price">Price: {values.price} €</h3>
           <label htmlFor="expiry">
-            Cardholder Name<span className="isrequired">*</span>
+            Cardholder Name
+            <span className="isrequired">*</span>
             <p className="form-error">{errors.cardHolder ? errors.cardHolder : ''}</p>
           </label>
           <input
@@ -30,7 +33,8 @@ export default function FormPaymentDetails({ showHideClassName, nextStep, prevSt
           />
 
           <label htmlFor="expiry">
-            Card Number<span className="isrequired">*</span>
+            Card Number
+            <span className="isrequired">*</span>
             <p className="form-error">{errors.cardNumber ? errors.cardNumber : ''}</p>
           </label>
           <input
@@ -45,8 +49,11 @@ export default function FormPaymentDetails({ showHideClassName, nextStep, prevSt
           />
 
           <label htmlFor="expiry">
-            Expiry<span className="isrequired">*</span>
-            <p className="form-error">{errors.expiryM ? errors.expiryM : errors.expiryY ? errors.expiryY : ''}</p>
+            Expiry
+            <span className="isrequired">*</span>
+            <p className="form-error">
+              {errors.expiryM || errors.expiryY}
+            </p>
           </label>
           <div className="expiry">
             <input
@@ -72,7 +79,8 @@ export default function FormPaymentDetails({ showHideClassName, nextStep, prevSt
           </div>
 
           <label htmlFor="expiry">
-            CVV/CVC<span className="isrequired">*</span>
+            CVV/CVC
+            <span className="isrequired">*</span>
             <p className="form-error">{errors.cvv ? errors.cvv : ''}</p>
           </label>
           <input
@@ -86,12 +94,12 @@ export default function FormPaymentDetails({ showHideClassName, nextStep, prevSt
             placeholder="CVV/CVC"
           />
           <div className="step">
-            <button onClick={prevStep}>Go Back</button>
-            <button onClick={nextStep}>Continue</button>
+            <button type="button" onClick={prevStep}>Go Back</button>
+            <button type="button" onClick={nextStep}>Continue</button>
           </div>
         </form>
       </div>
     </div>,
-    document.getElementById("modal")
-  )
+    document.getElementById('modal'),
+  );
 }

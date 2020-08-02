@@ -17,7 +17,7 @@ class MapContainer extends React.Component {
     hotels: Hotels, // Imported from ./data
   };
 
-  // Marker events
+  // Show infoWindow
   onMarkerClick = (props, marker) => {
     this.setState({
       selectedPlace: props,
@@ -26,53 +26,47 @@ class MapContainer extends React.Component {
     });
   };
 
+  // Hide InfoWindow on Map click
   onMapClicked = () => {
-    // Hide InfoWindow on Map click
     if (this.state.showingInfoWindow) {
-      this.setState({
-        showingInfoWindow: false,
-      });
+      this.setState({ showingInfoWindow: false });
     }
   };
 
   // Display Map Markers
   displayMarkers = () => {
-    return this.state.hotels.map((hotel, index) => {
-      return (
-        <Marker
-          icon={"./img/png/Group 1.png"}
-          key={index}
-          id={index}
-          title={hotel.adr}
-          position={{
-            lat: hotel.lat,
-            lng: hotel.lng,
-          }}
-          onClick={this.onMarkerClick}
-          label={"€" + hotel.price.toString()}
-          //
-          // Content of the infoWindow
-          infoWindow={
-            <div>
-              <div className="img">
-                <img alt={hotel.adr} src={"." + hotel.images[0]}></img>
-              </div>
-              <div className="display-flex-marker">
-                <div>€{hotel.price} / night</div>
-                <div className="flex">
-                  <span className="star">&#9733;</span>
-                  <p>{hotel.rating}</p>
-                  <span className="txt-sm">({hotel.reviews})</span>
-                </div>
-              </div>
-
-              <h5>{hotel.adr}</h5>
-              <h6>{hotel.title}</h6>
+    return this.state.hotels.map((hotel, index) => (
+      <Marker
+        icon={"./img/png/Group 1.png"}
+        key={index}
+        id={index}
+        title={hotel.adr}
+        position={{
+          lat: hotel.lat,
+          lng: hotel.lng,
+        }}
+        onClick={this.onMarkerClick}
+        label={"€" + hotel.price.toString()}
+        infoWindow={
+          <div>
+            <div className="img">
+              <img alt={hotel.adr} src={"." + hotel.images[0]}></img>
             </div>
-          }
-        ></Marker>
-      );
-    });
+            <div className="display-flex-marker">
+              <div>€{hotel.price} / night</div>
+              <div className="flex">
+                <span className="star">&#9733;</span>
+                <p>{hotel.rating}</p>
+                <span className="txt-sm">({hotel.reviews})</span>
+              </div>
+            </div>
+
+            <h5>{hotel.adr}</h5>
+            <h6>{hotel.title}</h6>
+          </div>
+        }
+      />
+    ));
   };
 
   render() {
@@ -80,17 +74,15 @@ class MapContainer extends React.Component {
       <div className="map-container">
         <Map
           className="map-google"
+          style={mapStyles}
+          onClick={this.onMapClicked}
           google={this.props.google}
           fullscreenControl={false}
           streetViewControl={false}
           mapTypeControl={false}
-          zoomControlOptions={{
-            position: this.props.google.maps.ControlPosition.TOP_LEFT,
-          }}
+          zoomControlOptions={{ position: this.props.google.maps.ControlPosition.TOP_LEFT }}
           zoom={13}
-          style={mapStyles}
           initialCenter={{ lat: 59.437, lng: 24.753 }}
-          onClick={this.onMapClicked}
         >
           {this.displayMarkers()}
           <InfoWindow
