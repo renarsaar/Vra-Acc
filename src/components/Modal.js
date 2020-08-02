@@ -1,398 +1,270 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { Link } from "react-router-dom";
+import React from 'react';
+import FormPersonalDetails from './Form/FormPersonalDetails';
+import FormDateDetails from './Form/FormDateDetails';
+import FormPaymentMethod from './Form/FormPaymentMethod';
+import FormPaymentDetails from './Form/FormPaymentDetails';
+import Confirm from './Form/Confirm';
+import Success from './Form/Success';
 
-import Field from "./Field";
-import Button from "./Button";
-
-let nameErr = "";
-let holderErr = "";
-let submitErr = "";
-let dateErr = "";
-let price = 0;
+const nameRegex = /^[a-zA-Z öäüõÖÄÜÕ]+$/;
+const emailRegex = /^([a-zA-Z0-9_\-.]+)@([a-zA-Z0-9_\-.]+)\.([a-zA-Z]{2,5})$/;
+const cardNumberRegex = /[0-9]{16}/;
+const expiryMRegex = /[0-9]{2}/;
+const expiryYRegex = /[0-9]{4}/;
+const cvvRegex = /[0-9]{3,4}/;
 
 class Modal extends React.Component {
   state = {
-    name: "",
-    email: "",
-    guests: null,
-    checkin: "",
-    checkout: "",
-    payment: "",
-    holder: "",
-    cardnumber: null,
-    expiryM: null,
-    expiryY: null,
-    cvv: null,
-    submit: "fail",
+    step: 1,
+    fullName: '',
+    email: '',
+    guests: '',
+    checkIn: '',
+    checkOut: '',
+    paymentMethod: '',
+    cardHolder: '',
+    cardNumber: '',
+    expiryM: '',
+    expiryY: '',
+    cvv: '',
+    price: this.props.price,
+    location: this.props.location,
+    title: this.props.title,
+    formErrors: { fullName: '', email: '', guests: '', checkIn: '', checkOut: '', paymentMethod: '', cardHolder: '', cardNumber: '', expiryM: '', expiryY: '', cvv: '' }
   };
 
+  // Clear Form Step
   componentWillUnmount() {
-    // Clear errors and price
-    price = 0;
-    submitErr = "";
-    dateErr = "";
+    this.setState({ step: 1 })
   }
 
-  // Set state on input change, validation
-  formChange = (e) => {
-    const name = e.target.name;
-    const val = e.target.value;
-    this.setState({ [name]: val });
+  // Proceed to next Step
+  nextStep = (e) => {
+    e.preventDefault();
+    const { step } = this.state;
 
-    // Regex test name
-    if (name === "name" || name === "holder") {
-      if (!val.match(/^[a-zöäüõ\s]{0,}$/gi)) {
-        if (name === "name") nameErr = "Please enter a valid name.";
-        if (name === "holder") holderErr = "Please enter a valid name.";
-
-        // Clear submitErr
-        submitErr = "";
-      } else {
-        if (name === "name") nameErr = "";
-        if (name === "holder") holderErr = "";
-
-        submitErr = "";
-      }
-    }
+    this.setState({
+      step: step + 1,
+    })
   };
 
-  // Restrict past dates
-  minDate = () => {
-    const date = new Date();
-    const dateTimeFormat = new Intl.DateTimeFormat("en", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-    });
-    const [
-      { value: month },
-      ,
-      { value: day },
-      ,
-      { value: year },
-    ] = dateTimeFormat.formatToParts(date);
+  // Go back to previous Step
+  prevStep = (e) => {
+    e.preventDefault();
+    const { step } = this.state;
 
-    return `${year}-${month}-${day}`;
+    this.setState({
+      step: step - 1,
+    })
   };
 
-  // Calculate price based on Check-in/out
+  // Handle fields change
+  handleChange = e => {
+    const { name, value } = e.target;
+    this.setState({ [name]: value });
+  };
+
+  // Handle choose payment
+  handlePaymentChange = value => e => {
+    this.setState({ paymentMethod: value });
+  }
+
+  // Calculate price based on dates
   calculatePrice = () => {
-    // Calculate price on Check-out select
-    if (this.state.checkin) {
-      const checkInDate = new Date(this.state.checkin);
-      const checkOutDate = new Date(this.state.checkout);
+    const { formErrors } = this.state;
 
-      // Get difference in days
-      const diffTime = Math.abs(checkOutDate - checkInDate);
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    if (this.state.checkIn && this.state.checkOut && !formErrors.checkIn && !formErrors.checkOut) {
+      const checkInDate = new Date(this.state.checkIn);
+      const checkOutDate = new Date(this.state.checkOut);
+      const differenceInTime = Math.abs(checkOutDate - checkInDate);
+      const differenceInDays = Math.ceil(differenceInTime / (1000 * 60 * 60 * 24));
 
-      // Check If Check-in is in past
-      if (checkInDate > checkOutDate) {
-        dateErr = "Please check your dates.";
-      } else {
-        dateErr = "";
-      }
-
-      // Calc new price
-      const newPrice = diffDays * this.props.price * this.state.guests;
-
-      // Set new price
-      price = newPrice;
+      const newPrice = differenceInDays * this.state.price * +this.state.guests;
+      this.setState({ price: newPrice });
     }
-  };
+  }
 
-  // Submit form event
-  submitForm = () => {
-    if (
-      // If array full of form values has no empty values and no errors exists
-      !Object.values(this.state).includes(null) &&
-      !Object.values(this.state).includes("") &&
-      nameErr === "" &&
-      holderErr === "" &&
-      dateErr === ""
-    ) {
-      this.setState({ submit: "pass" });
-    } else {
-      submitErr = "Please check your fields.";
-      this.setState({ submit: "fail" });
+  // Handle form validation
+  handleValidation = (e) => {
+    const { name, value } = e.target;
+    const { formErrors } = this.state;
+
+    const checkInDate = new Date(this.state.checkIn);
+    const checkOutDate = new Date(this.state.checkOut);
+
+    switch (name) {
+      case 'fullName':
+        formErrors.fullName = value.length < 3
+          ? 'Name must be atleast 3 characters.'
+          : !nameRegex.test(value)
+            ? 'Invalid name'
+            : '';
+        break;
+
+      case 'email':
+        formErrors.email = value.length < 1
+          ? 'Email address is required.'
+          : !emailRegex.test(value)
+            ? 'Invalid Email address'
+            : '';
+        break;
+
+      case 'guests':
+        formErrors.guests = value === ''
+          ? 'Amount of guests is required.'
+          : !Number(value)
+            ? 'Please insert a number'
+            : '';
+        break;
+
+      case 'checkIn':
+        formErrors.checkIn = value === ''
+          ? 'Check in date is required.'
+          : checkInDate > checkOutDate
+            ? 'Please check your dates'
+            : '';
+        break;
+
+      case 'checkOut':
+        formErrors.checkOut = value === ''
+          ? 'Check out date is required.'
+          : checkInDate > checkOutDate
+            ? 'Please check your dates'
+            : '';
+        break;
+
+      case 'cardHolder':
+        formErrors.cardHolder = value === ''
+          ? 'Card holder name is required.'
+          : !nameRegex.test(value)
+            ? 'Invalid name'
+            : '';
+        break;
+
+      case 'cardNumber':
+        formErrors.cardNumber = value === ''
+          ? 'Credit card number is required.'
+          : !cardNumberRegex.test(value)
+            ? 'Invalid Card number'
+            : '';
+        break;
+
+      case 'expiryM':
+        formErrors.expiryM = value === ''
+          ? 'Expiration date is required.'
+          : !expiryMRegex.test(value)
+            ? 'Invalid expiry date'
+            : '';
+        break;
+
+      case 'expiryY':
+        formErrors.expiryY = value === ''
+          ? 'Expiration date is required.'
+          : !expiryYRegex.test(value)
+            ? 'Invalid expiry date'
+            : '';
+        break;
+
+      case 'cvv':
+        formErrors.cvv = value === ''
+          ? 'Cvv code is required'
+          : !cvvRegex.test(value)
+            ? 'Invalid cvv code'
+            : '';
+        break;
+
+      default:
+        break;
     }
-  };
 
-  // Render content on payment form success
-  renderSpinner() {
-    // Change loading to success
-    setTimeout(() => {
-      document.getElementById("spinner").src = "../gif/success.gif";
-
-      // Change success gif to text
-      setTimeout(() => {
-        document.getElementById("spinner").classList.add("display-none");
-
-        document
-          .getElementById("spinner-content")
-          .classList.remove("display-none");
-      }, 2000);
-    }, 2000);
-
-    clearTimeout();
+    this.setState({ formErrors })
   }
 
   render() {
-    // Calculate price on render.
-    this.calculatePrice();
+    // Modal classes
+    const showHideClassName = this.props.show ? "modal display-block" : "modal display-none";
+    const { step, formErrors, ...values } = this.state;
 
-    // Show-Hide modal classes
-    const showHideClassName = this.props.show
-      ? "modal display-block"
-      : "modal display-none";
+    // Multi Step Form
+    switch (step) {
+      case 1:
+        return (
+          <FormPersonalDetails
+            showHideClassName={showHideClassName}
+            nextStep={this.nextStep}
+            handleClose={this.props.handleClose}
+            handleChange={this.handleChange}
+            handleValidation={this.handleValidation}
+            values={values}
+            errors={formErrors}
+          />
+        )
 
-    // If form submitted
-    if (this.state.submit === "pass") {
-      return (
-        <div className={showHideClassName}>
-          <div className="modal-main">
-            {/* Close Modal */}
-            <Button
-              btnClass="modal-btn"
-              clickEvent={this.props.handleClose}
-              text="Close"
-            />
+      case 2:
+        return (
+          <FormDateDetails
+            showHideClassName={showHideClassName}
+            nextStep={this.nextStep}
+            prevStep={this.prevStep}
+            handleClose={this.props.handleClose}
+            handleChange={this.handleChange}
+            handleValidation={this.handleValidation}
+            calculatePrice={this.calculatePrice}
+            values={values}
+            errors={formErrors}
+          />
+        )
+      case 3:
+        return (
+          <FormPaymentMethod
+            showHideClassName={showHideClassName}
+            nextStep={this.nextStep}
+            prevStep={this.prevStep}
+            handleClose={this.props.handleClose}
+            handleChange={this.handlePaymentChange}
+            values={values}
+            errors={formErrors}
+          />
+        )
 
-            <div onLoad={this.renderSpinner()} className="spinner">
-              <div
-                className="spinner-content display-none"
-                id="spinner-content"
-              >
-                <h1>Awesome!</h1>
-                <p>Your booking has been confirmed.</p>
-                <p>Check you email for details.</p>
-                <Link to="/vraa/">
-                  <button>OK</button>
-                </Link>
-              </div>
-              <img alt="spinner" id="spinner" src="../gif/loading.gif"></img>
-            </div>
-          </div>
-        </div>
-      );
+      case 4:
+        return (
+          <FormPaymentDetails
+            showHideClassName={showHideClassName}
+            nextStep={this.nextStep}
+            prevStep={this.prevStep}
+            handleClose={this.props.handleClose}
+            handleChange={this.handleChange}
+            handleValidation={this.handleValidation}
+            values={values}
+            errors={formErrors}
+          />
+        )
+
+      case 5:
+        return (
+          <Confirm
+            showHideClassName={showHideClassName}
+            nextStep={this.nextStep}
+            prevStep={this.prevStep}
+            handleClose={this.props.handleClose}
+            values={values}
+            errors={formErrors}
+          />
+        )
+
+      case 6:
+        return (
+          <Success
+            showHideClassName={showHideClassName}
+            values={values}
+            errors={formErrors}
+          />
+        )
+
+      default:
+        break;
     }
-
-    // Form
-    return ReactDOM.createPortal(
-      <div className={showHideClassName}>
-        <div className="modal-main">
-          {/* Close Modal */}
-          <Button
-            btnClass="modal-btn"
-            clickEvent={this.props.handleClose}
-            text="Close"
-          />
-
-          {/* Error Message */}
-          <div className="red error-message">{`${
-            // Output all errors
-            nameErr
-              ? nameErr
-              : holderErr
-              ? holderErr
-              : submitErr
-              ? submitErr
-              : dateErr
-              ? dateErr
-              : ""
-          }`}</div>
-
-          {/* Price */}
-          <div className="price">
-            {`${
-              price > 0 && !isNaN(price) && !dateErr ? `Price: ${price} €` : ""
-            }`}
-          </div>
-
-          <form>
-            {/* Left side */}
-            <div className="res-details">
-              {/* Full name  */}
-              <Field
-                name="name"
-                iClassName="fa fa-user"
-                text="Full Name"
-                type="text"
-                onFieldChange={this.formChange}
-              />
-
-              {/* Email */}
-              <Field
-                name="email"
-                iClassName="fa fa-envelope"
-                text="Email"
-                type="email"
-                onFieldChange={this.formChange}
-              />
-
-              {/* Guests */}
-              <Field
-                name="guests"
-                iClassName="fa fa-users"
-                text="Guests"
-                type="number"
-                min="1"
-                onFieldChange={this.formChange}
-              />
-
-              {/* Check-in */}
-              <label htmlFor="dates">
-                <i className="far fa-calendar-alt"></i>
-                Dates <span className="isrequired">*</span>
-              </label>
-              <input
-                type="text"
-                onFocus={() =>
-                  (document.getElementById("checkin").type = "date")
-                }
-                onChange={(e) => {
-                  this.formChange(e);
-                  this.calculatePrice();
-                }}
-                min={this.minDate()}
-                id="checkin"
-                name="checkin"
-                placeholder="Check In Date"
-              />
-              {/* Check-out */}
-              <input
-                type="text"
-                onFocus={() =>
-                  (document.getElementById("checkout").type = "date")
-                }
-                onChange={(e) => {
-                  this.formChange(e);
-                  this.calculatePrice();
-                }}
-                min={this.minDate()}
-                id="checkout"
-                name="checkout"
-                placeholder="Check Out Date"
-              />
-            </div>
-
-            {/* Right Side */}
-            <div className="res-payment">
-              {/* Paypal card */}
-              <div className="card paypal">
-                <div className="left">
-                  <input
-                    type="radio"
-                    id="pp"
-                    name="payment"
-                    value="Paypal"
-                    onChange={this.formChange}
-                  />
-                  <div className="radio"></div>
-                  <label htmlFor="pp">Paypal</label>
-                </div>
-                <div className="right">
-                  <i className="fab fa-cc-paypal dark-blue"></i>
-                </div>
-              </div>
-
-              {/* Credit card */}
-              <div className="card credit">
-                <div className="left">
-                  <input
-                    type="radio"
-                    id="cd"
-                    name="payment"
-                    value="Credit Card"
-                    onChange={this.formChange}
-                  />
-                  <div className="radio"></div>
-                  <label htmlFor="cd">Debit/Credit Card</label>
-                </div>
-                <div className="right">
-                  <i className="fa fa-cc-visa navy"></i>
-                  <i className="fa fa-cc-amex blue"></i>
-                  <i className="fa fa-cc-mastercard red"></i>
-                </div>
-              </div>
-
-              {/* Card Holder */}
-              <div className="card holder">
-                <div className="info">
-                  <Field
-                    name="holder"
-                    text="Card holder"
-                    type="text"
-                    onFieldChange={this.formChange}
-                  />
-                </div>
-              </div>
-
-              {/* Card Number */}
-              <div className="card card-number">
-                <div className="info">
-                  <Field
-                    name="cardnumber"
-                    text="Card number"
-                    type="tel"
-                    max="16"
-                    placeholder="xxxx-xxxx-xxxx-xxxx"
-                    onFieldChange={this.formChange}
-                  />
-                </div>
-              </div>
-
-              <div className="card-details">
-                <div className="left">
-                  {/* Expiry */}
-                  <label htmlFor="expiry">
-                    Expiry <span className="isrequired">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    maxLength="2"
-                    id="expiryM"
-                    name="expiryM"
-                    placeholder="MM"
-                    onChange={this.formChange}
-                  />
-                  <span>/</span>
-                  <input
-                    type="text"
-                    maxLength="4"
-                    id="expiryY"
-                    name="expiryY"
-                    placeholder="YYYY"
-                    onChange={this.formChange}
-                  />
-                </div>
-
-                {/* CVC */}
-                <div className="right">
-                  <Field
-                    name="cvv"
-                    text="CVC/CVV"
-                    type="text"
-                    max="4"
-                    placeholder="123"
-                    onFieldChange={this.formChange}
-                  />
-                </div>
-              </div>
-            </div>
-          </form>
-
-          <Button
-            btnClass="pay-btn"
-            type="submit"
-            text="Confirm and Pay"
-            clickEvent={this.submitForm}
-          />
-        </div>
-      </div>,
-      document.getElementById("modal")
-    );
   }
 }
 

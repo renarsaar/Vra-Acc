@@ -1,26 +1,22 @@
-@import url("https://fonts.googleapis.com/css2?family=Arvo&family=Indie+Flower&family=Lato&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Arvo&family=Indie+Flower&family=Source+Sans+Pro&family=Lato&display=swap");
 
-$primary-color: #2b76b3;
 $secondary-color: #7aa0be;
+$error-color: #ff0000;
+$success-color: #07c800;
 $light-color: #f4f4f4;
-$dark-color: #333;
+$lighter-color: #f5f5f5;
+$medium-color: #e2e2e2;
 $grey-color: #858585;
+$darker-color: #717981;
+$dark-color: #333;
 $font: "Lato", sans-serif;
 $large-font: 2.2rem;
 $regular-font: 1.5rem;
 
+$blue-color: #0e99d5;
+
 * {
   box-sizing: border-box;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-h5,
-h6 {
-  margin: 0.5rem 0;
 }
 
 body {
@@ -31,6 +27,20 @@ body {
   max-width: 100vw;
   margin: 0;
   padding: 0;
+}
+
+h5,
+h6 {
+  margin: 0.5rem 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
 }
 
 // Text classes
@@ -51,18 +61,28 @@ body {
   font-weight: 700;
 }
 
+// Show modal class
+.display-block {
+  display: block;
+}
+
+// Hide modal class
+.display-none {
+  display: none;
+}
+
 // Color classes
 .isrequired {
-  color: red;
+  color: $error-color;
   padding-left: 0.1rem;
 }
 
-.error {
-  border: 1px solid red !important;
+.error-border {
+  border: 1px solid $error-color !important;
 }
 
-.red {
-  color: red;
+.error {
+  color: $error-color;
 }
 
 .navy {
@@ -81,6 +101,28 @@ input:focus {
   outline: none;
 }
 
+%btn {
+  cursor: pointer;
+  background: transparent;
+  color: $grey-color;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.075rem;
+  border: 2px solid $darker-color;
+  transition: color 0.2s ease, border 0.2s ease;
+
+  &:hover {
+    color: $blue-color;
+    border: 2px solid $blue-color;
+    transition: color 0.2s ease-in-out, border 0.2s ease-in-out;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
 // infoWindow content
 .display-flex-marker {
   display: flex;
@@ -90,7 +132,7 @@ input:focus {
   font-weight: 500;
 
   .star {
-    color: $primary-color;
+    color: $blue-color;
     font-size: 1.2rem;
     margin-bottom: 0.4rem;
     margin-right: 0.2rem;
@@ -110,7 +152,7 @@ input:focus {
 // Header
 .header {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   width: 100%;
   font-size: $large-font;
@@ -118,7 +160,7 @@ input:focus {
 
   &-logo {
     font-size: 3rem;
-    color: $primary-color;
+    color: $blue-color;
   }
 
   &-form {
@@ -139,8 +181,12 @@ input:focus {
         border-top-left-radius: 4px;
         border-bottom-left-radius: 4px;
         font-size: 14px;
-        padding: 10px 12px;
+        padding: 0.7rem 0.9rem;
         margin: 0;
+
+        &:focus {
+          outline: none;
+        }
       }
     }
 
@@ -150,7 +196,7 @@ input:focus {
   }
 
   &-text {
-    color: $primary-color;
+    color: $blue-color;
   }
 }
 
@@ -225,7 +271,7 @@ input:focus {
 
 // Single hotel item
 .hotel-item {
-  border-top: 1px solid $primary-color;
+  border-top: 1px solid $blue-color;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -233,7 +279,7 @@ input:focus {
   width: 100%;
 
   &:last-child {
-    border-bottom: 1px solid $primary-color;
+    border-bottom: 1px solid $blue-color;
   }
 
   // hotel-item-info
@@ -273,7 +319,7 @@ input:focus {
         .star {
           padding-bottom: 6px;
           align-content: center;
-          color: $primary-color;
+          color: $blue-color;
           font-size: 1.2rem;
         }
       }
@@ -281,7 +327,7 @@ input:focus {
       &:hover h3,
       &:hover h4,
       &:hover p {
-        color: $primary-color;
+        color: $blue-color;
       }
     }
 
@@ -345,7 +391,7 @@ input:focus {
         padding: 5px;
 
         i {
-          color: $primary-color;
+          color: $blue-color;
           width: 15px;
           height: 15px;
           margin-right: 15px;
@@ -360,22 +406,9 @@ input:focus {
       padding: 40px 0 35px 0;
 
       button {
-        cursor: pointer;
-        font-size: 1.2rem;
-        background-color: $light-color;
-        color: $dark-color;
-        border: 1px solid $primary-color;
-        width: 50%;
-        padding: 0.5rem;
-        transition: all 0.3s ease;
-
-        &:hover {
-          transform: scale(1.03);
-        }
-
-        &:active {
-          transform: scale(0.98);
-        }
+        @extend %btn;
+        padding: 1rem 3.5rem;
+        transition: color 0.2s ease-in-out, border 0.2s ease-in-out;
       }
     }
   }
@@ -402,272 +435,324 @@ input:focus {
   }
 }
 
-// Modal classes
+// MODAL CLASSES
 .modal {
+  font-family: 'Source Sans Pro', Helvetica, sans-serif;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
-  transition: all 1s ease;
-}
 
-.modal-main {
-  position: fixed;
-  background: #fff;
-  width: 80%;
-  max-height: 80%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 1;
-  transition: opacity 1s ease;
+  .modal-main {
+    position: fixed;
+    background: $lighter-color;
+    width: 90%;
+    height: 90%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 3px;
 
-  // Close Button
-  .modal-btn {
-    cursor: pointer;
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: $light-color;
-    border: 1px solid $primary-color;
-    padding: 0.7rem;
-    transition: all 0.4s ease;
-    z-index: 10;
-
-    &:hover {
-      transform: scale(1.1);
+    h1 {
+      text-align: center;
+      margin-top: 6rem;
+      letter-spacing: 0.075rem;
     }
 
-    &:focus {
-      outline: none;
+    h2 {
+      text-align: center;
+      font-weight: bold;
+      letter-spacing: 0.075rem;
+      margin-top: 2rem;
+      margin-bottom: 0;
     }
-  }
 
-  // Error message
-  .error-message {
-    position: absolute;
-    left: 40%;
-    top: 20px;
-  }
-
-  .price {
-    position: absolute;
-    right: 19%;
-    top: 40px;
-  }
-
-  // Left side form. res-details form
-  form {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-
-    .res-details {
+    .step {
+      width: inherit;
       display: flex;
-      flex-direction: column;
-      align-items: left;
-      margin: 3.5rem;
-      width: 50%;
+      justify-content: space-evenly;
+      width: 100%;
+    }
 
-      label {
-        i {
-          color: $primary-color;
-          padding-right: 0.4rem;
-        }
+    // CLOSE MODAL
+    .close-modal {
+      cursor: pointer;
+      background: transparent;
+      border: 0;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 37px;
+      height: 37px;
+      z-index: 1;
+
+      &:focus {
+        outline: none;
       }
 
-      input {
-        margin-top: 0.5rem;
-        margin-bottom: 1rem;
-        display: block;
-        padding: 0.4rem;
-        width: 100%;
+      &:before, &:after {
+        position: absolute;
+        content: '';
+        top: 0;
+        height: 37px;
+        width: 2.55px;
+        border-radius: 5px;
+        background-color: $dark-color;
+        transition: background-color 0.2s ease-in-out;
+      }
+
+      &:before {
+        transform: rotate(45deg);
+      }
+
+      &:after {
+        transform: rotate(-45deg);
+      }
+
+      &:hover {
+        &:before, &:after {
+          background-color: $blue-color;
+          transition: background-color 0.2s ease-in-out;
+        }
       }
     }
 
-    // Right side of the form
-    .res-payment {
-      width: 50%;
-      margin: 3.5rem 2rem;
+    // PROGRESS BAR
+    .progress-container {
+      position: absolute;
+      content: "";
+      top: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
 
-      .paypal .left label {
-        padding: 0 !important;
-      }
+      .progress-step {
+        position: relative;
+        margin: 1rem 1.2rem;
+        font-size: 1.1rem;
+        color: $lighter-color;
 
-      // All inputs
-      input {
-        margin-top: 0.5rem;
-        margin-bottom: 1rem;
-        display: block;
-        padding: 0.4rem;
-      }
-
-      .card {
-        height: 20%;
-        width: 100%;
-
-        // Creadit Cards. Left side
-        .left {
-          display: inline-flex;
-          align-items: center;
-
-          label {
-            cursor: pointer;
-            user-select: none;
-            margin-left: 1rem;
-            padding: 1rem 0;
-          }
-
-          .radio {
-            position: absolute;
-            border: 3px solid $grey-color;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background-color: $light-color;
-          }
-
-          // Radio input custom.
-          input[type="radio"] {
-            visibility: hidden;
-          }
-
-          input[type="radio"]:checked ~ .radio {
-            border: 3px solid $primary-color;
-            background-color: $secondary-color;
-
-            &::before {
-              position: absolute;
-              content: "";
-              top: 3px;
-              left: 3px;
-              border-radius: 50%;
-              width: 8px;
-              height: 8px;
-              background-color: $light-color;
-            }
-          }
+        &::before {
+          position: absolute;
+          content: "";
+          width: 30px;
+          height: 30px;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background: $blue-color;
+          border-radius: 50%;
+          z-index: -2;
+          transition: background 0.3s ease;
         }
 
-        // Right side, card icons
-        .right {
-          float: right;
-          margin-top: 15px;
+        &.finished::before {
+          background: $success-color;
+        }
+
+        &.error::before {
+          background: $error-color;
+        }
+      }
+    }
+
+    // PAYMENT METHOD
+    .payment-method {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      width: 75%;
+      height: 300px;
+      margin: auto;
+      // margin-top: 4rem;
+      
+      .card {
+        position: relative;
+        cursor: pointer;
+        height: 175px;
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        color: $grey-color;
+        background: rgba($color: $medium-color, $alpha: 0.3);
+        border: 2px solid $medium-color;
+        transition: border 0.3s ease-out, color 0.3s ease-out;
+        
+        input {
+          border: 0px;
+          border-radius: 0;
+          height: 100%;
+          width: 100%;
+        }
+
+        &:hover {
+          border: 2px solid $dark-color;
+          color: $dark-color;
+          transition: border 0.3s ease-out, color 0.3s ease-out;
+        }
+
+        &.active {
+          border: 2px solid $blue-color;
 
           i {
-            margin: 0 2px;
-            font-size: 1.2rem;
+            color: $blue-color;
+          }
 
-            &:first-child {
-              margin-left: 1rem;
-            }
+          p {
+            color: $dark-color;
+          }
+
+          &::after {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.7rem;
+            font-weight: bold;
+            color: $blue-color;
+            background: $light-color;
+            border: 2px solid $blue-color;
+            border-radius: 50%;
+            position: absolute;
+            content: "\2713";
+            top: -20px;
+            right: -20px;
+            width: 40px;
+            height: 40px;
           }
         }
-      }
-
-      // Card Holder, Number
-      .info input {
-        width: 100%;
-      }
-
-      // Expiry, CVC
-      .card-details {
-        // Expiry. Left
-        .left input {
-          margin: 7px 4px;
-        }
-
-        //CVC. Right
-        .right input {
-          margin-left: 4px;
-        }
-
-        input {
-          display: inline;
-          width: 20%;
-
-          &:focus {
-            outline: none;
-          }
-        }
-      }
-    }
-  }
-
-  // Payment button
-  .pay-btn {
-    cursor: pointer;
-    position: absolute;
-    bottom: 10px;
-    right: 32%;
-    background: $light-color;
-    border: 1px solid $primary-color;
-    padding: 0.7rem;
-    width: 30%;
-    transition: all 0.4s ease;
-
-    &:focus {
-      outline: none;
-    }
-
-    &:hover {
-      transform: scale(1.05);
-    }
-  }
-
-  // Spinner, Success gif
-  .spinner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 400px;
-    height: 400px;
-    margin: auto;
-
-    .spinner-content {
-      text-align: center;
-      width: 250px;
-      height: 250px;
-      margin: 2rem;
-
-      h1 {
-        display: block;
-        color: $grey-color;
-        letter-spacing: 1px;
-      }
-
-      p {
-        display: block;
       }
 
       button {
-        cursor: pointer;
-        width: 100% !important;
-        border: 1px solid $primary-color;
-        padding: 0.7rem;
-        margin-top: 1.5rem;
+        @extend %btn;
+        width: 50%;
+        margin: auto;
+        margin-top: 2rem;
+        padding: 0.8rem 2rem;
+        transition: color 0.2s ease-in-out, border 0.2s ease-in-out;
+      }
+    }
+
+
+
+    // MODAL FORMS
+    form, .success, .confirm {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+      height: 100%;
+      margin-top: 1rem;
+      width: 90%;
+      max-width: 700px;
+
+      .expiry {
+        display: flex;
+        width: 100%;
+
+        input:first-child {
+          margin-right: 2rem;
+        }
+      }
+
+      .price {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      label {
+        position: relative;
+        width: 100%;
+        color: $grey-color;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        font-weight: bold;
+        letter-spacing: 0.075rem;
+        padding-bottom: 0.75rem;
+        margin: 0 auto;
+
+        .form-error {
+          position: absolute;
+          content: '';
+          top: -12px;
+          right: 0;
+          color: $error-color;
+          z-index: 99;
+        }
+      }
+
+      input {
+        width: 100%;
+        margin: 0 auto 0.75rem auto;
+        background: transparent;
+        border: solid 2px $medium-color;
+        outline: 0;
+        padding: 0 1rem;
+        height: 2.5rem;
 
         &:focus {
-          outline: none;
+          border: 2px solid $blue-color;
+        }
+
+        &::placeholder {
+          color: rgba($color: $dark-color, $alpha: 0.4);
+        }
+      }
+
+      // BUTTONS
+      .step {
+        width: inherit;
+        display: flex;
+        justify-content: space-evenly;
+
+        button {
+          @extend %btn;
+          padding: 0.8rem 2rem;
+          margin-top: 1.5rem;
+          transition: color 0.2s ease-in-out, border 0.2s ease-in-out;
+
+          &.valid:hover {
+            color: $success-color;
+            border: 2px solid $success-color;
+            transition: color 0.2s ease-in-out, border 0.2s ease-in-out, ;
+          }
+
+          &.invalid:hover {
+            color: $error-color;
+            border: 2px solid $error-color;
+            transition: color 0.2s ease-in-out, border 0.2s ease-in-out, ;
+          }
+        }
+      }
+
+      ul {
+        width: 100%;
+        
+        li {
+          margin-bottom: 0.8rem;
+          background: rgba($color: $blue-color, $alpha: 0.05);
+          padding: 0.35rem;
+          font-size: 0.8rem;
+          letter-spacing: 0.070rem;
+
+          span {
+            font-weight: 600;
+            margin-left: 1.5rem;
+          }
         }
       }
     }
   }
 }
 
-// Show modal class
-.display-block {
-  display: block;
-}
-
-// Hide modal class
-.display-none {
-  display: none;
-}
-
-// Footer
+// FOOTER
 .footer {
   font-size: 1.2rem;
   font-weight: 400;

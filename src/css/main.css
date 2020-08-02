@@ -1,14 +1,6 @@
-@import url("https://fonts.googleapis.com/css2?family=Arvo&family=Indie+Flower&family=Lato&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Arvo&family=Indie+Flower&family=Source+Sans+Pro&family=Lato&display=swap");
 * {
   box-sizing: border-box; }
-
-a {
-  color: inherit;
-  text-decoration: none; }
-
-h5,
-h6 {
-  margin: 0.5rem 0; }
 
 body {
   background-color: #f4f4f4;
@@ -18,6 +10,17 @@ body {
   max-width: 100vw;
   margin: 0;
   padding: 0; }
+
+h5,
+h6 {
+  margin: 0.5rem 0; }
+
+a {
+  color: inherit;
+  text-decoration: none; }
+
+li {
+  list-style: none; }
 
 .txt-sm {
   display: flex;
@@ -34,15 +37,21 @@ body {
   color: #858585;
   font-weight: 700; }
 
+.display-block {
+  display: block; }
+
+.display-none {
+  display: none; }
+
 .isrequired {
-  color: red;
+  color: #ff0000;
   padding-left: 0.1rem; }
 
-.error {
-  border: 1px solid red !important; }
+.error-border {
+  border: 1px solid #ff0000 !important; }
 
-.red {
-  color: red; }
+.error {
+  color: #ff0000; }
 
 .navy {
   color: navy; }
@@ -56,6 +65,23 @@ body {
 input:focus {
   outline: none; }
 
+.hotel-info .reservation button, .modal .modal-main .payment-method button, .modal .modal-main form .step button, .modal .modal-main .success .step button, .modal .modal-main .confirm .step button {
+  cursor: pointer;
+  background: transparent;
+  color: #858585;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 0.075rem;
+  border: 2px solid #717981;
+  transition: color 0.2s ease, border 0.2s ease; }
+  .hotel-info .reservation button:hover, .modal .modal-main .payment-method button:hover, .modal .modal-main form .step button:hover, .modal .modal-main .success .step button:hover, .modal .modal-main .confirm .step button:hover {
+    color: #0e99d5;
+    border: 2px solid #0e99d5;
+    transition: color 0.2s ease-in-out, border 0.2s ease-in-out; }
+  .hotel-info .reservation button:focus, .modal .modal-main .payment-method button:focus, .modal .modal-main form .step button:focus, .modal .modal-main .success .step button:focus, .modal .modal-main .confirm .step button:focus {
+    outline: none; }
+
 .display-flex-marker {
   display: flex;
   justify-content: space-between;
@@ -63,7 +89,7 @@ input:focus {
   font-size: 0.8rem;
   font-weight: 500; }
   .display-flex-marker .star {
-    color: #2b76b3;
+    color: #0e99d5;
     font-size: 1.2rem;
     margin-bottom: 0.4rem;
     margin-right: 0.2rem; }
@@ -77,14 +103,14 @@ input:focus {
 
 .header {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   width: 100%;
   font-size: 2.2rem;
   padding: 0.5rem 1.5rem; }
   .header-logo {
     font-size: 3rem;
-    color: #2b76b3; }
+    color: #0e99d5; }
   .header-form form {
     display: flex; }
     .header-form form .search-btn {
@@ -99,12 +125,15 @@ input:focus {
       border-top-left-radius: 4px;
       border-bottom-left-radius: 4px;
       font-size: 14px;
-      padding: 10px 12px;
+      padding: 0.7rem 0.9rem;
       margin: 0; }
+      .header-form form input:focus,
+      .header-form form button:focus {
+        outline: none; }
   .header-form input[type="text"] {
     width: 370px; }
   .header-text {
-    color: #2b76b3; }
+    color: #0e99d5; }
 
 .map-container {
   height: 90vh;
@@ -158,14 +187,14 @@ input:focus {
   overflow: scroll; }
 
 .hotel-item {
-  border-top: 1px solid #2b76b3;
+  border-top: 1px solid #0e99d5;
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 1rem;
   width: 100%; }
   .hotel-item:last-child {
-    border-bottom: 1px solid #2b76b3; }
+    border-bottom: 1px solid #0e99d5; }
   .hotel-item-info {
     width: 100%;
     margin-right: 1rem; }
@@ -189,12 +218,12 @@ input:focus {
         .hotel-item-info-about .review .star {
           padding-bottom: 6px;
           align-content: center;
-          color: #2b76b3;
+          color: #0e99d5;
           font-size: 1.2rem; }
       .hotel-item-info-about:hover h3,
       .hotel-item-info-about:hover h4,
       .hotel-item-info-about:hover p {
-        color: #2b76b3; }
+        color: #0e99d5; }
     .hotel-item-info-rooms {
       margin-bottom: 2rem; }
       .hotel-item-info-rooms p {
@@ -232,7 +261,7 @@ input:focus {
         font-weight: 400;
         padding: 5px; }
         .hotel-info ul li i {
-          color: #2b76b3;
+          color: #0e99d5;
           width: 15px;
           height: 15px;
           margin-right: 15px;
@@ -241,18 +270,8 @@ input:focus {
       text-align: center;
       padding: 40px 0 35px 0; }
       .hotel-info .reservation button {
-        cursor: pointer;
-        font-size: 1.2rem;
-        background-color: #f4f4f4;
-        color: #333;
-        border: 1px solid #2b76b3;
-        width: 50%;
-        padding: 0.5rem;
-        transition: all 0.3s ease; }
-        .hotel-info .reservation button:hover {
-          transform: scale(1.03); }
-        .hotel-info .reservation button:active {
-          transform: scale(0.98); }
+        padding: 1rem 3.5rem;
+        transition: color 0.2s ease-in-out, border 0.2s ease-in-out; }
   .hotel-images {
     margin: auto;
     display: grid;
@@ -269,172 +288,227 @@ input:focus {
       grid-area: 1 / 1 / span 3 / span 3; }
 
 .modal {
+  font-family: 'Source Sans Pro', Helvetica, sans-serif;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  transition: all 1s ease; }
-
-.modal-main {
-  position: fixed;
-  background: #fff;
-  width: 80%;
-  max-height: 80%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 1;
-  transition: opacity 1s ease; }
-  .modal-main .modal-btn {
-    cursor: pointer;
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    background: #f4f4f4;
-    border: 1px solid #2b76b3;
-    padding: 0.7rem;
-    transition: all 0.4s ease;
-    z-index: 10; }
-    .modal-main .modal-btn:hover {
-      transform: scale(1.1); }
-    .modal-main .modal-btn:focus {
-      outline: none; }
-  .modal-main .error-message {
-    position: absolute;
-    left: 40%;
-    top: 20px; }
-  .modal-main .price {
-    position: absolute;
-    right: 19%;
-    top: 40px; }
-  .modal-main form {
-    display: flex;
-    justify-content: space-around;
-    align-items: center; }
-    .modal-main form .res-details {
+  background: rgba(0, 0, 0, 0.6); }
+  .modal .modal-main {
+    position: fixed;
+    background: #f5f5f5;
+    width: 90%;
+    height: 90%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 3px; }
+    .modal .modal-main h1 {
+      text-align: center;
+      margin-top: 6rem;
+      letter-spacing: 0.075rem; }
+    .modal .modal-main h2 {
+      text-align: center;
+      font-weight: bold;
+      letter-spacing: 0.075rem;
+      margin-top: 2rem;
+      margin-bottom: 0; }
+    .modal .modal-main .step {
+      width: inherit;
+      display: flex;
+      justify-content: space-evenly;
+      width: 100%; }
+    .modal .modal-main .close-modal {
+      cursor: pointer;
+      background: transparent;
+      border: 0;
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 37px;
+      height: 37px;
+      z-index: 1; }
+      .modal .modal-main .close-modal:focus {
+        outline: none; }
+      .modal .modal-main .close-modal:before, .modal .modal-main .close-modal:after {
+        position: absolute;
+        content: '';
+        top: 0;
+        height: 37px;
+        width: 2.55px;
+        border-radius: 5px;
+        background-color: #333;
+        transition: background-color 0.2s ease-in-out; }
+      .modal .modal-main .close-modal:before {
+        transform: rotate(45deg); }
+      .modal .modal-main .close-modal:after {
+        transform: rotate(-45deg); }
+      .modal .modal-main .close-modal:hover:before, .modal .modal-main .close-modal:hover:after {
+        background-color: #0e99d5;
+        transition: background-color 0.2s ease-in-out; }
+    .modal .modal-main .progress-container {
+      position: absolute;
+      content: "";
+      top: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%; }
+      .modal .modal-main .progress-container .progress-step {
+        position: relative;
+        margin: 1rem 1.2rem;
+        font-size: 1.1rem;
+        color: #f5f5f5; }
+        .modal .modal-main .progress-container .progress-step::before {
+          position: absolute;
+          content: "";
+          width: 30px;
+          height: 30px;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          background: #0e99d5;
+          border-radius: 50%;
+          z-index: -2;
+          transition: background 0.3s ease; }
+        .modal .modal-main .progress-container .progress-step.finished::before {
+          background: #07c800; }
+        .modal .modal-main .progress-container .progress-step.error::before {
+          background: #ff0000; }
+    .modal .modal-main .payment-method {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      width: 75%;
+      height: 300px;
+      margin: auto; }
+      .modal .modal-main .payment-method .card {
+        position: relative;
+        cursor: pointer;
+        height: 175px;
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: auto;
+        color: #858585;
+        background: rgba(226, 226, 226, 0.3);
+        border: 2px solid #e2e2e2;
+        transition: border 0.3s ease-out, color 0.3s ease-out; }
+        .modal .modal-main .payment-method .card input {
+          border: 0px;
+          border-radius: 0;
+          height: 100%;
+          width: 100%; }
+        .modal .modal-main .payment-method .card:hover {
+          border: 2px solid #333;
+          color: #333;
+          transition: border 0.3s ease-out, color 0.3s ease-out; }
+        .modal .modal-main .payment-method .card.active {
+          border: 2px solid #0e99d5; }
+          .modal .modal-main .payment-method .card.active i {
+            color: #0e99d5; }
+          .modal .modal-main .payment-method .card.active p {
+            color: #333; }
+          .modal .modal-main .payment-method .card.active::after {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.7rem;
+            font-weight: bold;
+            color: #0e99d5;
+            background: #f4f4f4;
+            border: 2px solid #0e99d5;
+            border-radius: 50%;
+            position: absolute;
+            content: "\2713";
+            top: -20px;
+            right: -20px;
+            width: 40px;
+            height: 40px; }
+      .modal .modal-main .payment-method button {
+        width: 50%;
+        margin: auto;
+        margin-top: 2rem;
+        padding: 0.8rem 2rem;
+        transition: color 0.2s ease-in-out, border 0.2s ease-in-out; }
+    .modal .modal-main form, .modal .modal-main .success, .modal .modal-main .confirm {
+      position: relative;
       display: flex;
       flex-direction: column;
-      align-items: left;
-      margin: 3.5rem;
-      width: 50%; }
-      .modal-main form .res-details label i {
-        color: #2b76b3;
-        padding-right: 0.4rem; }
-      .modal-main form .res-details input {
-        margin-top: 0.5rem;
-        margin-bottom: 1rem;
-        display: block;
-        padding: 0.4rem;
+      align-items: center;
+      justify-content: center;
+      margin: auto;
+      height: 100%;
+      margin-top: 1rem;
+      width: 90%;
+      max-width: 700px; }
+      .modal .modal-main form .expiry, .modal .modal-main .success .expiry, .modal .modal-main .confirm .expiry {
+        display: flex;
         width: 100%; }
-    .modal-main form .res-payment {
-      width: 50%;
-      margin: 3.5rem 2rem; }
-      .modal-main form .res-payment .paypal .left label {
-        padding: 0 !important; }
-      .modal-main form .res-payment input {
-        margin-top: 0.5rem;
-        margin-bottom: 1rem;
-        display: block;
-        padding: 0.4rem; }
-      .modal-main form .res-payment .card {
-        height: 20%;
-        width: 100%; }
-        .modal-main form .res-payment .card .left {
-          display: inline-flex;
-          align-items: center; }
-          .modal-main form .res-payment .card .left label {
-            cursor: pointer;
-            user-select: none;
-            margin-left: 1rem;
-            padding: 1rem 0; }
-          .modal-main form .res-payment .card .left .radio {
-            position: absolute;
-            border: 3px solid #858585;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background-color: #f4f4f4; }
-          .modal-main form .res-payment .card .left input[type="radio"] {
-            visibility: hidden; }
-          .modal-main form .res-payment .card .left input[type="radio"]:checked ~ .radio {
-            border: 3px solid #2b76b3;
-            background-color: #7aa0be; }
-            .modal-main form .res-payment .card .left input[type="radio"]:checked ~ .radio::before {
-              position: absolute;
-              content: "";
-              top: 3px;
-              left: 3px;
-              border-radius: 50%;
-              width: 8px;
-              height: 8px;
-              background-color: #f4f4f4; }
-        .modal-main form .res-payment .card .right {
-          float: right;
-          margin-top: 15px; }
-          .modal-main form .res-payment .card .right i {
-            margin: 0 2px;
-            font-size: 1.2rem; }
-            .modal-main form .res-payment .card .right i:first-child {
-              margin-left: 1rem; }
-      .modal-main form .res-payment .info input {
-        width: 100%; }
-      .modal-main form .res-payment .card-details .left input {
-        margin: 7px 4px; }
-      .modal-main form .res-payment .card-details .right input {
-        margin-left: 4px; }
-      .modal-main form .res-payment .card-details input {
-        display: inline;
-        width: 20%; }
-        .modal-main form .res-payment .card-details input:focus {
-          outline: none; }
-  .modal-main .pay-btn {
-    cursor: pointer;
-    position: absolute;
-    bottom: 10px;
-    right: 32%;
-    background: #f4f4f4;
-    border: 1px solid #2b76b3;
-    padding: 0.7rem;
-    width: 30%;
-    transition: all 0.4s ease; }
-    .modal-main .pay-btn:focus {
-      outline: none; }
-    .modal-main .pay-btn:hover {
-      transform: scale(1.05); }
-  .modal-main .spinner {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 400px;
-    height: 400px;
-    margin: auto; }
-    .modal-main .spinner .spinner-content {
-      text-align: center;
-      width: 250px;
-      height: 250px;
-      margin: 2rem; }
-      .modal-main .spinner .spinner-content h1 {
-        display: block;
+        .modal .modal-main form .expiry input:first-child, .modal .modal-main .success .expiry input:first-child, .modal .modal-main .confirm .expiry input:first-child {
+          margin-right: 2rem; }
+      .modal .modal-main form .price, .modal .modal-main .success .price, .modal .modal-main .confirm .price {
+        position: absolute;
+        top: 0;
+        left: 0; }
+      .modal .modal-main form label, .modal .modal-main .success label, .modal .modal-main .confirm label {
+        position: relative;
+        width: 100%;
         color: #858585;
-        letter-spacing: 1px; }
-      .modal-main .spinner .spinner-content p {
-        display: block; }
-      .modal-main .spinner .spinner-content button {
-        cursor: pointer;
-        width: 100% !important;
-        border: 1px solid #2b76b3;
-        padding: 0.7rem;
-        margin-top: 1.5rem; }
-        .modal-main .spinner .spinner-content button:focus {
-          outline: none; }
-
-.display-block {
-  display: block; }
-
-.display-none {
-  display: none; }
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        font-weight: bold;
+        letter-spacing: 0.075rem;
+        padding-bottom: 0.75rem;
+        margin: 0 auto; }
+        .modal .modal-main form label .form-error, .modal .modal-main .success label .form-error, .modal .modal-main .confirm label .form-error {
+          position: absolute;
+          content: '';
+          top: -12px;
+          right: 0;
+          color: #ff0000;
+          z-index: 99; }
+      .modal .modal-main form input, .modal .modal-main .success input, .modal .modal-main .confirm input {
+        width: 100%;
+        margin: 0 auto 0.75rem auto;
+        background: transparent;
+        border: solid 2px #e2e2e2;
+        outline: 0;
+        padding: 0 1rem;
+        height: 2.5rem; }
+        .modal .modal-main form input:focus, .modal .modal-main .success input:focus, .modal .modal-main .confirm input:focus {
+          border: 2px solid #0e99d5; }
+        .modal .modal-main form input::placeholder, .modal .modal-main .success input::placeholder, .modal .modal-main .confirm input::placeholder {
+          color: rgba(51, 51, 51, 0.4); }
+      .modal .modal-main form .step, .modal .modal-main .success .step, .modal .modal-main .confirm .step {
+        width: inherit;
+        display: flex;
+        justify-content: space-evenly; }
+        .modal .modal-main form .step button, .modal .modal-main .success .step button, .modal .modal-main .confirm .step button {
+          padding: 0.8rem 2rem;
+          margin-top: 1.5rem;
+          transition: color 0.2s ease-in-out, border 0.2s ease-in-out; }
+          .modal .modal-main form .step button.valid:hover, .modal .modal-main .success .step button.valid:hover, .modal .modal-main .confirm .step button.valid:hover {
+            color: #07c800;
+            border: 2px solid #07c800;
+            transition: color 0.2s ease-in-out, border 0.2s ease-in-out; }
+          .modal .modal-main form .step button.invalid:hover, .modal .modal-main .success .step button.invalid:hover, .modal .modal-main .confirm .step button.invalid:hover {
+            color: #ff0000;
+            border: 2px solid #ff0000;
+            transition: color 0.2s ease-in-out, border 0.2s ease-in-out; }
+      .modal .modal-main form ul, .modal .modal-main .success ul, .modal .modal-main .confirm ul {
+        width: 100%; }
+        .modal .modal-main form ul li, .modal .modal-main .success ul li, .modal .modal-main .confirm ul li {
+          margin-bottom: 0.8rem;
+          background: rgba(14, 153, 213, 0.05);
+          padding: 0.35rem;
+          font-size: 0.8rem;
+          letter-spacing: 0.070rem; }
+          .modal .modal-main form ul li span, .modal .modal-main .success ul li span, .modal .modal-main .confirm ul li span {
+            font-weight: 600;
+            margin-left: 1.5rem; }
 
 .footer {
   font-size: 1.2rem;
