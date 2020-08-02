@@ -124,7 +124,7 @@ class HotelItem extends React.Component {
             <p>
               {hotel.reviews} reviews. Rating: {hotel.rating} out of 5.
             </p>
-            <h4>Price: €{hotel.price} / night</h4>
+            <h4>Price: &euro;{hotel.price} / night</h4>
           </div>
           <h4>Amenities</h4>
           <ul>

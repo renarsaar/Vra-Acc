@@ -35,19 +35,19 @@ export default function Confirm({
 
         <div className="confirm">
           <ul>
-            <li>Location: <span>{values.location}({values.title})</span></li>
+            <li>Location: <span>{values.location}&#40;{values.title}&#41;</span></li>
             <li>Name: <span>{values.fullName}</span></li>
             <li>Email: <span>{values.email}</span></li>
             <li>Number of Guests: <span>{values.guests}</span></li>
             <li>Check In Date: <span>{values.checkIn}</span></li>
             <li>Check out Date: <span>{values.checkOut}</span></li>
-            <li>Price: <span>{values.price}</span></li>
+            <li>Price: <span>{values.price}&euro;</span></li>
           </ul>
 
           <div className="step">
             <button type="button" onClick={prevStep}>Go Back</button>
             <button
-              type="button"
+              type="submit"
               className={!valid ? 'invalid' : 'valid'}
               disabled={!valid ? 'disabled' : ''}
               onClick={nextStep}

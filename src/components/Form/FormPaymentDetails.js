@@ -16,11 +16,11 @@ export default function FormPaymentDetails({
         </div>
 
         <form>
-          <h3 className="price">Price: {values.price} €</h3>
           <label htmlFor="expiry">
+            <h3 className="price">Price: {values.price} €</h3>
             Cardholder Name
             <span className="isrequired">*</span>
-            <p className="form-error">{errors.cardHolder ? errors.cardHolder : ''}</p>
+            <p className="form-error">{errors.cardHolder}</p>
           </label>
           <input
             className={errors.cardHolder ? 'error-border' : ''}
@@ -35,7 +35,7 @@ export default function FormPaymentDetails({
           <label htmlFor="expiry">
             Card Number
             <span className="isrequired">*</span>
-            <p className="form-error">{errors.cardNumber ? errors.cardNumber : ''}</p>
+            <p className="form-error">{errors.cardNumber}</p>
           </label>
           <input
             className={errors.cardNumber ? 'error-border' : ''}
@@ -81,7 +81,7 @@ export default function FormPaymentDetails({
           <label htmlFor="expiry">
             CVV/CVC
             <span className="isrequired">*</span>
-            <p className="form-error">{errors.cvv ? errors.cvv : ''}</p>
+            <p className="form-error">{errors.cvv}</p>
           </label>
           <input
             className={errors.cvv ? 'error-border' : ''}

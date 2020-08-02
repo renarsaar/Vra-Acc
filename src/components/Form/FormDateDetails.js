@@ -43,7 +43,7 @@ export default function FormDateDetails({
           <label htmlFor={values.checkIn}>
             Check In Date
             <span className="isrequired">*</span>
-            <p className="form-error">{errors.checkIn ? errors.checkIn : ''}</p>
+            <p className="form-error">{errors.checkIn}</p>
           </label>
           <input
             className={errors.checkIn ? 'error-border' : ''}
@@ -58,7 +58,7 @@ export default function FormDateDetails({
           <label htmlFor={values.checkOut}>
             Check Out Date
             <span className="isrequired">*</span>
-            <p className="form-error">{errors.checkOut ? errors.checkOut : ''}</p>
+            <p className="form-error">{errors.checkOut}</p>
           </label>
           <input
             className={errors.checkOut ? 'error-border' : ''}

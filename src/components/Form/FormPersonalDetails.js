@@ -19,7 +19,7 @@ export default function FormPersonalDetails({
           <label htmlFor="name">
             Name
             <span className="isrequired">*</span>
-            <p className="form-error">{errors.fullName ? errors.fullName : ''}</p>
+            <p className="form-error">{errors.fullName}</p>
           </label>
           <input
             className={errors.fullName ? 'error-border' : ''}
@@ -33,7 +33,7 @@ export default function FormPersonalDetails({
           <label htmlFor="email">
             Email
             <span className="isrequired">*</span>
-            <p className="form-error">{errors.email ? errors.email : ''}</p>
+            <p className="form-error">{errors.email}</p>
           </label>
           <input
             className={errors.email ? 'error-border' : ''}
@@ -47,7 +47,7 @@ export default function FormPersonalDetails({
           <label htmlFor="guests">
             Number of guests
             <span className="isrequired">*</span>
-            <p className="form-error">{errors.guests ? errors.guests : ''}</p>
+            <p className="form-error">{errors.guests}</p>
           </label>
           <input
             className={errors.guests ? 'error-border' : ''}
