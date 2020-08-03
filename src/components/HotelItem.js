@@ -1,11 +1,19 @@
 import React from 'react';
 import Modal from './Modal';
 
+import FilterContext from '../contexts/FilterContext';
+
 class HotelItem extends React.Component {
+  static contextType = FilterContext;
   state = {
     imgs: this.props.location.state.hotelDetails.images,
     showModal: false,
   };
+
+  // Hide searchbar
+  componentDidMount() {
+    this.context.handleShowSearchBar(false);
+  }
 
   // Show modal
   showModal = () => {
@@ -149,6 +157,7 @@ class HotelItem extends React.Component {
   }
 
   render() {
+    console.log(this.context);
     return <div>{this.renderHotel()}</div>;
   }
 }

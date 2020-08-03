@@ -20,23 +20,31 @@ class Header extends React.Component {
   };
 
   render() {
-    return (
-      <div className="header">
-        <Link to="/" className="header-text">VRA Accommodations</Link>
-        <div className="header-form">
-          <form onSubmit={this.onFormSubmit}>
-            <input
-              onChange={this.onInputChange}
-              type="text"
-              placeholder="Search for type(apartment, house, room...)"
-            />
-            <button className="search-btn">
-              <i className="fas fa-search"></i>
-            </button>
-          </form>
+    if (this.context.showSearchBar) {
+      return (
+        <div className="header">
+          <Link to="/vraa/" className="header-text">VRA Accommodations</Link>
+          <div className="header-form">
+            <form onSubmit={this.onFormSubmit}>
+              <input
+                onChange={this.onInputChange}
+                type="text"
+                placeholder="Search for type(apartment, house, room...)"
+              />
+              <button className="search-btn">
+                <i className="fas fa-search"></i>
+              </button>
+            </form>
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return (
+        <div className="header">
+          <Link to="/" className="header-text">VRA Accommodations</Link>
+        </div>
+      );
+    }
   }
 }
 

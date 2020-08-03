@@ -3,6 +3,7 @@ import { Map, Marker, GoogleApiWrapper, InfoWindow } from "google-maps-react";
 
 import { Hotels } from "./data/Hotels";
 import HotelList from "./HotelList";
+import FilterContext from '../contexts/FilterContext';
 
 const mapStyles = {
   width: "40%",
@@ -10,12 +11,18 @@ const mapStyles = {
 };
 
 class MapContainer extends React.Component {
+  static contextType = FilterContext;
   state = {
     showingInfoWindow: false,
     activeMarker: {},
     selectedPlace: {},
     hotels: Hotels, // Imported from ./data
   };
+
+  // Show searchbar
+  componentDidMount() {
+    this.context.handleShowSearchBar(true);
+  }
 
   // Show infoWindow
   onMarkerClick = (props, marker) => {
